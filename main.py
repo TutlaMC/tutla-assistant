@@ -18,11 +18,6 @@ import socket
 
 
 from asyncio import run
-ai_API_URL = "https://www.stack-inference.com/run_deployed_flow?flow_id=65b242c79c2a22e31b1b90a0&org=c5bc6bfa-be03-4432-9131-a3a27734c5cf"
-ai_headers = {'Authorization':
-			 'Bearer 3282febe-5061-48f1-84ca-d8e680e57612',
-			 'Content-Type': 'application/json'
-		}
 
 def ai_query(payload):
  response = requests.post(ai_API_URL, headers=ai_headers, json=payload)
@@ -653,7 +648,7 @@ class Client(discord.Client):
                         encoded_text = base64.b64encode(str(i.id).encode()).decode()
                         await message.channel.send(f'Token First Part: `{encoded_text}`')
                 elif message.content.startswith('.iptranslate'):
-                        api_key = "597f5c30badb51"  
+                        api_key = "PUT UR KEY HERE"  
                         ip_address = message.content.replace('.iptranslate ','')
                         ip_address = ip_address.replace(' ','')
                         url = f"http://ipinfo.io/{ip_address}?token={api_key}"
