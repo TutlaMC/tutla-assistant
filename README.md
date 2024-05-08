@@ -30,3 +30,5 @@ To install this you will first install Python 3.8+ with it in the environment va
 `pip install discord.py-self wikipedia freegpt beautifulsoup4 pillow`
 
 Once successfully installing the libraries you would want to make some changes in the file as it has many advertisements to our Discord and more which have been listed in the notice above.
+
+Then you may proceed to adding the account you want to run the assistant program on. You must get the token of the account and paste it into `assistantdata/token.txt` you may configur
