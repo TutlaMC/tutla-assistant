@@ -35,6 +35,6 @@ Then you may proceed to adding the account you want to run the assistant program
 Once the installation is complete you can follow this **optional** method that keepsit 24/6/365:
 
 ### 24/7 running
-We have also added `run.sh` (for linux) that will restart the file when it crashes (it sometimes crashes). You will need to change `python3.9 err.py` to whatever suits you. That line is the command to run the script with `python3.9` being your python eecutable command and the following file is your code. 
+We have also added `run.sh` (for linux) that will restart the file when it crashes (it sometimes crashes). You will need to change `python3.9 main.py` to whatever suits you. That line is the command to run the script with `python3.9` being your python eecutable command and the following file is your code. 
 
 Run `./run.sh` to get it started
