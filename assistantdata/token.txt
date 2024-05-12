@@ -1,1 +1,1 @@
-Enter your token here (Replace this line and do not add spacesor anything else toehr than your token)
+Enter your token here
