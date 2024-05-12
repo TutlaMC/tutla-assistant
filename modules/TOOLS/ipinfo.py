@@ -2,7 +2,7 @@ from ..Module import *
 from ..Utils import *
 import requests
 async def ipinfo_callback(CommandObject,message,self,params,command_data):
-                        api_key = "ENTER YOUR API KEY HERE"  
+                        api_key = "ENTER API KEY HERE"  
                         ip_address = message.content.replace('.iptranslate ','')
                         ip_address = ip_address.replace("https://","")
                         ip_address = ip_address.replace("http://","")
