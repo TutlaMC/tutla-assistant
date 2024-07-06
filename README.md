@@ -5,6 +5,35 @@ Official Tutla Assistant Bot source code
 The Tutla Assitant bot has been a project I've worked on for a long time. Today, I decided to share this project.
 Tutla Assistant is a Discord Selfbot that has many QOL & Helpful commands, you can see all the commands by running `.help` on any channel.
 
+## UPDATE 1.3
+ADD:
+- Check premium (of other users) 
+- .serverinfo (for other servers using invite & id)
+- premium advantage on .activesite
+- .serverinfo alias: .inviteinfo, .server
+- Display aliases on help page for a command 
+- .userinfo: isbot?
+- Online Count for .serverinfo
+- Increase wikipedia output
+
+OPTIMIZE:
+- .serverinfo DONE
+- .userinfo DONE
+
+BACKEND CHANGES:
+- Correct server changed to "user" in .userinfo
+- Fixed Several grammatical errors
+
+FIX:
+- Join Servers
+- .serverinfo channel count 
+- .userinfo with no params 
+- .wikipedia wrong parameter retrieval 
+- .ai 
+- .ipinfo 
+- Grammatical errors in .help command usage 
+
+
 ## Note
 This is a selfbot and break Discord's TOS, use it knowing the risks. Secondly, the source code provided is raw and has not been modified for your installation. You willl manually have to change the invite links and so on, you may want to change:
 - The Admin Command Roles
@@ -20,14 +49,13 @@ You require:
   Python Libraries:
 - discord.py-self
 - wikipedia
-- freegpt
 - BeautifulSoup
 - pillow
 
 **YOU DO NOT NEED DISCORD INSTALLED, IT USES DISCORD's API TO SEND AND GET REQUESTS**
 
 To install this you will first install Python 3.8+ with it in the environment variables. After that you may want to install each of the libraries as follows:
-`pip install discord.py-self wikipedia freegpt beautifulsoup4 pillow`
+`pip install discord.py-self wikipedia beautifulsoup4 pillow`
 
 Once successfully installing the libraries you would want to make some changes in the file as it has many advertisements to our Discord and more which have been listed in the notice above.
 
