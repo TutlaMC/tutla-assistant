@@ -65,7 +65,8 @@ class Command:
         if usage == None: 
             usage = "The Usage has not been specified, so this is the usage built by the system:\n"
             usage+="This Command "+self.description.lower()+"\n"
-            usage+=f".{self.name} {' '.join(param for param in self.params)}"
+            usage+=f".{self.name} {' '.join(param for param in self.params)}\n"
+            usage += f"Aliases:\n{chr(10).join(self.aliases)}"
         self.usage = usage
 
             

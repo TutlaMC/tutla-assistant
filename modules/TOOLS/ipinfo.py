@@ -1,9 +1,10 @@
 from ..Module import * 
 from ..Utils import *
 import requests
+with open("assistantdata/api_key.txt","r") as f:
+        api_key=f.read()
 async def ipinfo_callback(CommandObject,message,self,params,command_data):
-                        api_key = "ENTER API KEY HERE"  
-                        ip_address = message.content.replace('.iptranslate ','')
+                        ip_address = params[1]
                         ip_address = ip_address.replace("https://","")
                         ip_address = ip_address.replace("http://","")
                         ip_address = ip_address.replace(' ','')
@@ -17,7 +18,7 @@ async def ipinfo_callback(CommandObject,message,self,params,command_data):
                         region = data.get("region", "N/A")
                         country = data.get("country", "N/A")
                         location = f"{city}, {region}, {country}"
-                        if country=='N/A': 
+                        if country=='N/A' and not ip.isdigit(): 
                             ip_address = domain_to_ip(ip_address)
                             url = f"http://ipinfo.io/{ip_address}?token={api_key}"
                             response = requests.get(url)

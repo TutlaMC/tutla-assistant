@@ -6,7 +6,6 @@ from bs4 import BeautifulSoup
 import base64
 from datetime import datetime
 import re
-from freeGPT import AsyncClient
 from PIL import Image
 from io import BytesIO
 from math import *
@@ -59,11 +58,7 @@ premium_reload()
 ban_reload()
 
                 
-async def image_callback(CommandObject,message,self,params,command_data):
-                            await message.channel.send("Generating please wait")
-                            resp = await AsyncClient.create_generation("prodia", message.content.replace(".image",""))
-                            await message.channel.send(file=discord.File(BytesIO(resp), filename='image.jpg'))
-image_command = Command("image", 'AI Image Generation!', image_callback, TOOLS, aliases=['picture',"imagine"],params=["PROMPT"])
+
 
 
 class Client(discord.Client):
@@ -72,7 +67,7 @@ class Client(discord.Client):
 
     async def on_ready(self):
         global dev_mode
-        print("ready")
+        print("Tutla Assistance Initialized")
         game = discord.Streaming(name="discord.tutla.net",game="discord.tutla.net",url="https://discord.tutla.net")
         await client.change_presence(status=discord.Status.idle, activity=game)
 
@@ -81,7 +76,6 @@ class Client(discord.Client):
     async def on_message(self,message): 
         global premium_list
         global thoughts_list
-        global version
 
         
         

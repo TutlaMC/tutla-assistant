@@ -7,4 +7,4 @@ async def example_callback(CommandObject,message,self,params,command_data):
 
 
                     await message.channle.send(CommandObject.description+f"\nWhat you said: {params[1]}")
-ex_command = Command("example","Example command for making a PR to the Tutla Asisstance bot, see the Github for more info.",example_callback,CLIENT,aliases=["example",'command','ex'],params=["TEST PARAM"],isfree=True)
+ex_command = Command("example","Example command for making a PR to the Tutla Asisstance bot, see the Github for more info.",example_callback,CLIENT,aliases=['command','ex'],params=["TEST PARAM"],isfree=True)

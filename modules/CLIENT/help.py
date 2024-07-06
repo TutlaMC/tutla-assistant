@@ -63,4 +63,4 @@ async def help_callback(CommandObject,message,self,params,command_data):
                             await message.channel.send(nmessage)
 
                                
-help_command = Command("help","Opens up this menu",help_callback,CLIENT,aliases=['usage','what'],params=['PAGE NUMBER'],usage="Command usage has been stated below, the page number must always be an integer or you can enter a command to see it's usage.",isfree=True)
+help_command = Command("help","Opens up this menu",help_callback,CLIENT,aliases=['usage','what'],params=['PAGE NUMBER'],usage="The page number must always be an integer or you can enter a command to see it's usage.",isfree=True)

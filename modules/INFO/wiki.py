@@ -1,8 +1,8 @@
 from ..Module import * 
 import wikipedia
-#from ..Utils import * #import this if you need utility commands
+from ..Utils import * 
 async def wiki_callback(CommandObject,message,self,params,command_data):
-                    try: await message.channel.send(wikipedia.summary(message.content.replace('.wiki ',''),2))
+                    try: await message.channel.send(wikipedia.summary(message_without_command(CommandObject,params),3))
                     except Exception as e:
                         await message.channel.send("Error in object: \n```python\n"+str(e)+'```')
 
