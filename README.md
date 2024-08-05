@@ -5,33 +5,44 @@ Official Tutla Assistant Bot source code
 The Tutla Assitant bot has been a project I've worked on for a long time. Today, I decided to share this project.
 Tutla Assistant is a Discord Selfbot that has many QOL & Helpful commands, you can see all the commands by running `.help` on any channel.
 
-## UPDATE 1.3
-ADD:
-- Check premium (of other users) 
-- .serverinfo (for other servers using invite & id)
-- premium advantage on .activesite
-- .serverinfo alias: .inviteinfo, .server
-- Display aliases on help page for a command 
-- .userinfo: isbot?
-- Online Count for .serverinfo
-- Increase wikipedia output
+## V1.4 Changelog:
 
-OPTIMIZE:
-- .serverinfo DONE
-- .userinfo DONE
+### ADDED:
+- `.binary, .tobinary`
+- Deletes commanding message (may cuz bugs) 
+- Spacing between `.regional` letters so it doesnt turn into flags (not an issue, only gets converted to flags when copied so not a bug)
+- Calculate with python math functions on `.calc` - added almost a year ago, lost when changing to V1.2
+- **More- MUCH more** added to `.8ball` responses, including stickers
+- `.ansiformat` Description
+- `.joshify` gets a much more **interesting system where it demolishes grammar** instead of typos
 
-BACKEND CHANGES:
-- Correct server changed to "user" in .userinfo
-- Fixed Several grammatical errors
 
-FIX:
-- Join Servers
-- .serverinfo channel count 
-- .userinfo with no params 
-- .wikipedia wrong parameter retrieval 
-- .ai 
-- .ipinfo 
-- Grammatical errors in .help command usage 
+### BACKEND:
+- `is` replaced with `==` in `userinfo.py`
+- **Added Comments** to `main.py`
+- Displays command executed in console
+- Ballsdex ping for `@ardtyss` and `@tutlamc`
+- Flow of execution has changed (improving response time by milliseconds)
+- Removed random python caches reducing compression size by 20%+
+- Compact Code in `main.py`
+- `.ai` no longer needs `freegpt`
+
+
+### REMOVED
+~~- `.broadcast` which was added in Beta versions~~ Postponed to V1.5
+- Ballsdex Ping
+
+### BUG FIXED
+- `is` -> `==`  :nerd::nerd::nerd::nerd::nerd::nerd:
+- Removed annoying "yes" in Initialization
+- Removed command name displayed on .regional output
+- Added spaces to `.regional` to make it not convert into flags
+- Fixed all react commands
+- Fixed all react command usage screens
+- Fixed `.wiki`
+- Fixed `.rizz`
+- Fixed `.chatded`
+
 
 
 ## Note
