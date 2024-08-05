@@ -1,7 +1,7 @@
 from ..Module import * 
-
+from ..Utils import *
 async def ansi_callback(CommandObject,message,self,params,command_data):
-                    formatted_message = message.content.replace('.ansiformat', '')
+                    formatted_message = message_without_command(params)
 
                     text_color_mapping = {
                         '30': 'gray',
@@ -47,4 +47,8 @@ async def ansi_callback(CommandObject,message,self,params,command_data):
                                                         .replace('</highlight>', '\033[0m')
 
                     await message.channel.send(f'```ansi\n{formatted_message}\033[0m```')
-ansi_command = Command("ansiformat","Format text in color with ansi!",ansi_callback,TOOLS,aliases=["ansi","ansify"],params=["TEXT"])
+ansi_command = Command("ansiformat","Format text in color with ansi!",ansi_callback,TOOLS,aliases=["ansi","ansify"],params=["TEXT"],usage="""
+I'm gay so I can't make an entire tutorial but here's a small explanation: [(text)[<color></color><highlight></highlight>|<bold></bold><underline></underline>]]  | Converts your text into cool ansi text: Usage (HTML like usage):
+<red></red><green></green><blue></blue><yellow></yellow><pink></pink><cyan></cyan><gray></gray>
+Background Colors: <firefly-dark-blue></firefly-dark-blue><orange></orange><marble-blue></marble-blue><greyish-turquoise></greyish-turquoise><gray></gray><indigo></indigo><light-gray></light-gray><white></white>
+Other Formats: <bold></bold> <highlight></highlight) -> (for background)     <underline></underline>""")

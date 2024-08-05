@@ -1,7 +1,7 @@
 from ..Module import * 
-
+from ..Utils import *
 async def regional_callback(CommandObject,message,self,params,command_data):
-                    stuff = message.content.replace('.toregional ','')
+                    stuff = message_without_command(params)
                     newm = ''
                     variables_list = []
 
@@ -19,9 +19,9 @@ async def regional_callback(CommandObject,message,self,params,command_data):
 
                         position = ascii_value - ord('a')
                         if i == ' ':
-                                newm+='     '
+                                newm+='      '
                         try:
-                            newm += variables_list[position]
+                            newm += variables_list[position]+" "
                         except Exception:
                             pass
                             

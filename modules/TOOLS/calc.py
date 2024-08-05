@@ -1,4 +1,5 @@
 from ..Module import * 
+from math import *
 
 async def calc_callback(CommandObject,message,self,params,command_data):
                     con = command_data['member']

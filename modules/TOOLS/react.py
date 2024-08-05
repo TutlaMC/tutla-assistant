@@ -95,7 +95,7 @@ async def reactemojito(CommandObject,message,self,params,command_data):
                         if len(words) > 3:
                             thechannel = await self.fetch_channel(int(words[1]))
                             themsg = await thechannel.fetch_message(int(words[2]))
-                            ae = message.content.replace('.react    emojito ','')
+                            ae = message.content.replace('.reactemojito ','')
                             
                             ae = ae.replace('"','')
                             ae = ae.replace("'",'')
@@ -106,17 +106,19 @@ async def reactemojito(CommandObject,message,self,params,command_data):
                             result = []
                             inside_quotes = False
                             
-
+                            print(ae)
+                            
                             for char in ae.lower():
                                 result.append(char)
+                            print(result)
                             for i in result:
                                 
                                     await themsg.add_reaction(i)
 
                                 
-                        else: await message.channel.send('Incorrect usage, message needs [channelID] & [messageID]\nCorrect Usage:```.reacto [channelID] [messageID] [content]')
+                        else: await message.channel.send('Incorrect usage, message needs [channelID] & [messageID]\nCorrect Usage:```.reacto [channelID] [messageID] [emoji]```')
 
 react_command = Command("react", 'React on a message with ease via replying', react_callback, TOOLS, aliases=['visualsay'],params=["TEXT"])
-reacto_command = Command("reacto", 'React to a message which you cannot reply to', reacto_callback, TOOLS, aliases=['reactto'],params=["TEXT"])
-reactemoji_command = Command("reacto", 'React with emojis', reactemoji, TOOLS, aliases=['reactmoji'],params=["TEXT"])
-reactemojito_command = Command("reactemojito",'React with emoji on a message you cannot reply to',reactemojito,TOOLS,aliases=['reactmojito'],params=["TEXT"])
+reacto_command = Command("reacto", 'React to a message which you cannot reply to', reacto_callback, TOOLS, aliases=['reactto'],params=[ "channelID", "messageID" ,"TEXT"])
+reactemoji_command = Command("reactemoji", 'React with emojis', reactemoji, TOOLS, aliases=['reactmoji'],params=["EMOJI"])
+reactemojito_command = Command("reactemojito",'React with emoji on a message you cannot reply to',reactemojito,TOOLS,aliases=['reactmojito'],params=[ "channelID", "messageID" ,"emoji"])

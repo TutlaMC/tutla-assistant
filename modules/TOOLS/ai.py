@@ -1,5 +1,4 @@
 from ..Module import * 
-from freeGPT import Client
 from io import BytesIO
 import discord
 

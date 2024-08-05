@@ -31,7 +31,7 @@ async def userinfo_callback(CommandObject,message,self,params,command_data):
                     channel = await self.fetch_channel(message.channel.id)
                     for user in message.mentions:
                             await userinfo_main(user,message.channel)
-                    if len(message.mentions) is 0:
+                    if len(message.mentions) == 0:
                             await userinfo_main(message.author, message.channel)
                             
 

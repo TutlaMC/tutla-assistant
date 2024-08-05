@@ -16,9 +16,7 @@ def section_add(name,command):
     global commands2
     section_name = "------- "+name+" --------\n"
     
-    if name in commands2:
-        print("yes")
-        
+    if name in commands2:        
         commands2[name]['commands'].update({command.name:command})
     else:
 
@@ -63,11 +61,9 @@ class Command:
         
         self.usage_format = f".{self.name} {' '.join(param for param in self.params)}"
         if usage == None: 
-            usage = "The Usage has not been specified, so this is the usage built by the system:\n"
-            usage+="This Command "+self.description.lower()+"\n"
-            usage+=f".{self.name} {' '.join(param for param in self.params)}\n"
-            usage += f"Aliases:\n{chr(10).join(self.aliases)}"
-        self.usage = usage
+            usage = "**The Usage has not been specified, so this is the usage built by the system:\n"
+            usage+="This Command "+self.description.lower()+"**\n"
+        self.usage = usage+f"\n.{self.name} {' '.join(param for param in self.params)}\n"+ f"Aliases:\n{chr(10).join(self.aliases)}"
 
             
 
@@ -77,7 +73,7 @@ class Command:
 
         
     async def run(self,message,discord_client,params,command_data):
-
+        print(f"Executed Command {params[0]}")
         await self.method(self,message,discord_client,params,command_data)
 
 

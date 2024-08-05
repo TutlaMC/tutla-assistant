@@ -85,6 +85,7 @@ async def example_callback(CommandObject,message,self,params,command_data):
 ex_command = Command("example","Example command for making a PR to the Tutla Asisstance bot, see the Github for more info.",example_callback,CLIENT,aliases=['command','ex'],params=["TEST PARAM"],isfree=True)
 ```
 
+
 1. `from ..Module import *` will give you the Command Class and a few categories to start with. Change this line to your file structure
 2. Next we come to the asynchronous function, you can name it anything but it must be updated in the Command declaration. This function must take 5 parameters.
 3. Inside the command we can get the "member" variable off the command_data. You can use this to check if the member is a part of your server, similiarly of premium. Then finally we send a message with the description of the command and the first parameter.

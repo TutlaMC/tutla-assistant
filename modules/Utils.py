@@ -3,7 +3,7 @@ import base64
 import socket
 premium_list = []
 banlist=[]
-version = 'V1.3'
+version = 'V1.4'
 true = True
 false = False
 
@@ -37,5 +37,5 @@ def ban_reload():
             for line in lines:banlist.append(line)
 def message_without_command(params):
     message = ""
-    for param in params: message += param+" "
+    for param in params[1:]: message += param+" "
     return message

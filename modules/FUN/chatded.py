@@ -1,5 +1,5 @@
 from ..Module import * 
-import datetime
+from datetime import datetime
 #from ..Utils import * #import this if you need utility commands
 async def chatded_callback(CommandObject,message,self,params,command_data):
     

@@ -1,6 +1,6 @@
 from ..Module import * 
 import random
-import bs4 as BeautifulSoup
+from bs4 import BeautifulSoup
 import requests
 async def rizz_callback(CommandObject,message,self,params,command_data):
     url = 'https://www.womansday.com/relationships/dating-marriage/a41055149/best-pickup-lines/'
