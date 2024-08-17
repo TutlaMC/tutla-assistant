@@ -13,6 +13,5 @@ async def calc_callback(CommandObject,message,self,params,command_data):
                         await message.channel.send('Answer: `'+str(eval(values_to_calc))+'`')
                     except Exception as e:
                         await message.channel.send('Invalid Numbers')
-                        print(e)
                     if not con : free_access = True
 calc_command = Command("calc","Calculate what you want",calc_callback,TOOLS,aliases=["calculate",'math','int'],params=["NUMBER OR PYTHON MATH FUNCTION"],isfree=True)

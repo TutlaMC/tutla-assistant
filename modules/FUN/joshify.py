@@ -61,4 +61,4 @@ async def joshify_callback(CommandObject,message,self,params,command_data):
                         transformed_words.append(transformed_word)
                     transformed_sentence = ' '.join(transformed_words)
                     await message.channel.send(transformed_sentence)
-joshify_command = Command("joshify","Joshify text, also known as the latest geenration of grammar",joshify_callback,FUN,aliases=["grammar","grammarly"],isfree=True)
+joshify_command = Command("joshify","Joshify text, also known as the latest geenration of grammar",joshify_callback,FUN,aliases=["grammar","grammarly"])

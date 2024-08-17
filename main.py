@@ -14,12 +14,20 @@ import os
 import socket
 import asyncio
 
+import mods.ClickCrystalsBot
+import mods.SniperMod
+import mods.ChatBot
+from mods import mod
 
+from modules.CLIENT import dm
 from modules.CLIENT import help
-from modules.CLIENT import premium
 from modules.CLIENT import inservers
-from modules.CLIENT import say
 from modules.CLIENT import join
+from modules.CLIENT import premium
+from modules.CLIENT import listmods
+from modules.CLIENT import reload
+from modules.CLIENT import say
+
 
 from modules.INFO import serverinfo
 from modules.INFO import userinfo
@@ -71,16 +79,22 @@ class Client(discord.Client):
     async def on_ready(self): # Throws an AD into Status
         global dev_mode
         print("Tutla Assistance Initialized")
-        game = discord.Streaming(name="discord.tutla.net",game="discord.tutla.net",url="https://discord.tutla.net") 
-        await client.change_presence(status=discord.Status.idle, activity=game)
+        #game = discord.Streaming(name="discord.tutla.net",game="discord.tutla.net",url="https://discord.tutla.net") 
+        #await client.change_presence(status=discord.Status.idle, activity=game)
+
+        for mode in mod.mods: # Mod Intializer
+            mode.bot = self
+            if mode.initial != None:
+                await mode.initial()
 
 
-         
+    
     async def on_message(self,message): 
         global premium_list       
-        
-        # Removed Ballsdex Ping for @ardtyss & @tutlamc removed
-        # Fun Fact: My comments are shit, pr if you agree
+        for mode in mod.mods: # Mod On Message
+
+            if mode.onMessage != None:
+                await mode.onMessage(message)
 
         ############## User Checks ##############
         thisguild = await self.fetch_guild(1189449885615927296)
@@ -90,9 +104,8 @@ class Client(discord.Client):
             if boimember:
                 con = True
         except Exception as e:
-            print(e)
             con = False
-        
+       
        
         
         if str(message.author.id) in premium_list: premium = True
@@ -102,12 +115,7 @@ class Client(discord.Client):
         ##############             ##############
         
         
-        if message.guild and message.guild.id == 1095079504516493404: # The if-chain below is for the ClickCrystals Discord as it has Wick which prevents Assistance from sending long messages
-             if message.content.startswith('.') :
-                if message.channel.id != 1095082036848496680: 
-                    eerrrrrrrrr = await self.fetch_channel(1095082036848496680)
-                    await eerrrrrrrrr.send(f"{message.author.mention}, According to how smart I am (refering to <@1142511163821801493>), you should not use Tutla Assistant outside of spam.")
-                    return True
+        
         
         if not banned: # Now the Actual Code
             command_data = { # Retrives all the Users Checks
@@ -137,7 +145,7 @@ class Client(discord.Client):
                                  await command_object.run(message, self, message.content.split(),command_data)
                                  done = True
                             try:  await message.delete() 
-                            except Exception as e: print(e)
+                            except Exception as e: pass # Removed Annoying message No Permission Error
                              
             if message.content == ".balls":
                  await message.channel.send("https://tenor.com/view/balls-gif-22045792")
@@ -241,8 +249,12 @@ class Client(discord.Client):
         
         premium = False # cuz it's global (idk maybe or atleast used to, since V1.1 or 1.2)
         con = False 
+    async def on_message_delete(self,message):
+         for module in mod.mods: # Mod Intializer
+            if module.onDelete != None:
+                await module.onDelete(message) 
 with open('assistantdata/token.txt','r') as f:
         token = f.read()
-print(token)
+# print(token)
 client = Client()
 client.run(token)

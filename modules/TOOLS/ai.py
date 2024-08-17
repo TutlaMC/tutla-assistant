@@ -1,8 +1,9 @@
 from ..Module import * 
+from ..Utils import *
 from io import BytesIO
 import discord
-
-from random import randint
+import requests
+from random import randint,  seed
 from aiohttp import ClientSession, ClientError
 
 async def create( prompt):
@@ -80,8 +81,15 @@ async def image(prompt):
                                     return await resp.content.read()
         except ClientError as exc:
             raise ClientError("Unable to fetch the response.") from exc
+
+
 async def image_callback(CommandObject,message,self,params,command_data):
                             await message.channel.send("Generating please wait")
-                            resp = await image(message.content.replace(".image",""))
-                            await message.channel.send(file=discord.File(BytesIO(resp), filename='image.jpg'))
-image_command = Command("image", 'AI Image Generation!', image_callback, TOOLS, aliases=['picture',"imagine"],params=["PROMPT"],ispremium=True)
+                            resp = requests.get(f"https://pollinations.ai/p/{message.content.replace('.image','')}?width={700}&height={700}&seed={seed()}")
+                            await message.channel.send(f"New Picture generated\n-# Prompt: {message.content}",file=discord.File(BytesIO(resp.content), filename='image.jpg'))
+async def imagine_callback(CommandObject,message,self,params,command_data):
+                            await message.channel.send("Generating please wait")
+                            resp = await image(message_without_command(params))
+                            await message.channel.send(f"Image Generation with Prodia\n-# Prompt: {message.content}",file=discord.File(BytesIO(resp), filename='image.jpg'))
+image_command = Command("image", 'AI Image Generation!', image_callback, TOOLS, aliases=['picture'],params=["PROMPT"],ispremium=True)
+imagine_command = Command("imagine", 'AI Image Generation with Prodia', imagine_callback, TOOLS, aliases=["think","draw"],params=["PROMPT"],ispremium=True)

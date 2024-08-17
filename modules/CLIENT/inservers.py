@@ -9,4 +9,4 @@ async def inservers_callback(CommandObject,message,self,params,command_data):
                     nmessage+='- '+i.name+'\n'
      nmessage+='```'
      await message.channel.send(nmessage)
-inservers_command = Command("inservers", 'Lists all servers user is in', inservers_callback, CLIENT, aliases=['inservers', 'servers'],isfree=True)
+inservers_command = Command("inservers", 'Lists all servers user is in', inservers_callback, CLIENT, aliases=['ls', 'servers'],isfree=True)

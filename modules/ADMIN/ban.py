@@ -18,4 +18,4 @@ async def ban_callback(CommandObject,message,self,params,command_data):
                                 except Exception as e: await message.channel.send('I do not have permission to ban users')
                     else:
                         await message.channel.send(f'You do not have permission to ban users')
-ban_command = Command("kick","Ban a user off the server",ban_callback,ADMIN,aliases=["permakick"],isfree=True,usage="You can ban users with this command and you can also kick a ban replying to their message")
+ban_command = Command("ban","Ban a user off the server",ban_callback,ADMIN,aliases=["permakick"],isfree=True,usage="You can ban users with this command and you can also kick a ban replying to their message")

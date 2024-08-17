@@ -1,9 +1,10 @@
 # Utils
 import base64
 import socket
+from mods import mod
 premium_list = []
 banlist=[]
-version = 'V1.4'
+version = 'V1.5'
 true = True
 false = False
 
