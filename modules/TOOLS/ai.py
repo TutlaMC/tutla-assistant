@@ -32,7 +32,7 @@ async def ai_callback(CommandObject,message,self,params,command_data):
                 resp =  await create(message.content.replace(".ai",""))
                 await message.channel.send(resp)
 
-ai_command = Command("ai", 'GPT3 AI Within Discord!', ai_callback, TOOLS, aliases=['gpt',"gpt3"],params=["PROMPT"])
+ai_command = Command("ai", 'GPT3 AI Within Discord!', ai_callback, TOOLS, aliases=['gpt',"gpt3"],params=["PROMPT"],ispremium=True)
 
 
 async def image(prompt):

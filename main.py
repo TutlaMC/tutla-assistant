@@ -1,22 +1,10 @@
 import discord
-import time
-import requests
-import random
-import wikipedia
-from bs4 import BeautifulSoup
-import base64
-from datetime import datetime
-import re
-from PIL import Image
-from io import BytesIO
 from math import *
-import os
-import socket
-import asyncio
-
+import sys 
 import mods.ClickCrystalsBot
 import mods.SniperMod
-import mods.ChatBot
+import mods.EMod
+import mods.sudo
 from mods import mod
 
 from modules.CLIENT import dm
@@ -27,6 +15,7 @@ from modules.CLIENT import premium
 from modules.CLIENT import listmods
 from modules.CLIENT import reload
 from modules.CLIENT import say
+from modules.CLIENT import version
 
 
 from modules.INFO import serverinfo
@@ -50,6 +39,7 @@ from modules.TOOLS import rizz
 
 from modules.FUN import activesite
 from modules.FUN import chatded
+from modules.FUN import doxx
 from modules.FUN import joshify
 from modules.FUN import life
 from modules.FUN import lmao
@@ -63,12 +53,21 @@ from modules.example import example
 
 from modules.Module import *
 from modules.Utils import *
-# OMG TUTLA IS COMENTING 1!!!1!1!1!1!11!!
+
+import threading
+
+sys.dont_write_bytecode = True
+
+def tutlashell_input():
+    while True:
+        cmd = input("Tutla Shell > ")
+        if cmd == "exit":
+             exit()
+tutlashellThread = threading.Thread(target=tutlashell_input).start()
+
       
 premium_reload() # Util Command to get all premium users
-ban_reload()
-
-                
+ban_reload()  
 
 
 

@@ -7,7 +7,5 @@ async def life_callback(CommandObject,message,self,params,command_data):
     for i in message.mentions:
         for err in range(5):
             ghost_ping = await message.channel.send(i.mention,delete_after=1)
-            user = await self.fetch_channel(i.dm_channel.id)
-            await user.send("phat el")
 
 life_cmd = Command("life","Oblitirate someone by ghost pinging them and spamming their dms. IK evil",life_callback,FUN,aliases=["kill",'end','spam'],params=["USER PING"],ispremium=True)

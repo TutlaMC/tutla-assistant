@@ -4,7 +4,7 @@ import socket
 from mods import mod
 premium_list = []
 banlist=[]
-version = 'V1.5'
+version = 'V1.5.1'
 true = True
 false = False
 

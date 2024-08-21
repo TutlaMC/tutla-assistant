@@ -14,7 +14,7 @@ async def timeout_callback(CommandObject,message,self,params,command_data):
                                 await message.channel.send(f'Timed out user {i.mention}')
                             except Exception as e:
                                 failed = True
-                                await message.channel.send(f'I do not have permissions to timeout or user is already timed out, error log: {e}')
+                                await message.channel.send(f'I do not have permissions to timeout or user is already timed out, error log:\n```python\n{e}```')
                     else:
                      await message.channel.send('You do not have permissions to timeout!')
 timeout_command = Command("timeout","Timeout a user.",timeout_callback,ADMIN,aliases=["mute"],isfree=True)
