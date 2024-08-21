@@ -5,36 +5,23 @@ Official Tutla Assistant Bot source code
 The Tutla Assitant bot has been a project I've worked on for a long time. Today, I decided to share this project.
 Tutla Assistant is a Discord Selfbot that has many QOL & Helpful commands, you can see all the commands by running `.help` on any channel.
 
-> # Tutla Assistance V1.5 Changelog
-> 
-> ## Added
-> - `.dm`
-> - `.inservers` alias change
-> - `.reload`
-> - `.say` filters
-> - `.joshify` and few other commands are no longer free
-> - Nerfed `.life`
-> - `.nuke` is now premium
-> - `image` uses pollinations, `imagine` is the old one
-> 
-> ## Removed
-> - ClickCrystals Spam Channel Req
-> 
-> ## Bug Fixes
-> - Bans instead of kick bug
-> -  Spamming empty `.8ball` arguments
-> 
-> ## Backend
-> - Reorganized imports
-> 
-> ## Modding
-> - `initial` event
-> - `on_message` event
-> - `on_delete` event
-> - `.listmods`
-> - Added a Demo Mod (ChatBot.py) & 2 Mods:
->  - SnipeBot: Snipes Messages
->  - ClickrystalsHelper: CC Helper
+# 1.5.1 Changelog
+Note: V1.5 Cycle will just be bug fixes, terminal and modding. Mostly just bug fixes.
+## MODDING
+- EMod
+- Linux Mod
+- Added `data` for databases (will be worked on soon 👀)
+
+## ADDED
+- Terminal (Technically backend but will be bigger later on)
+- `.doxx`
+- `.version`
+- Made `.ai` premium
+
+## BUG FIXES
+- Fixed `.life` bug
+- Tried fixing `.dm` (it didn't work, but optimized)
+- `.timeout` error log fix
 
 
 ## Note
