@@ -5,33 +5,20 @@ Official Tutla Assistant Bot source code
 The Tutla Assitant bot has been a project I've worked on for a long time. Today, I decided to share this project.
 Tutla Assistant is a Discord Selfbot that has many QOL & Helpful commands, you can see all the commands by running `.help` on any channel.
 
-## UPDATE 1.4
-ADD:
-- Check premium (of other users) 
-- .serverinfo (for other servers using invite & id)
-- premium advantage on .activesite
-- .serverinfo alias: .inviteinfo, .server
-- Display aliases on help page for a command 
-- .userinfo: isbot?
-- Online Count for .serverinfo
-- Increase wikipedia output
+# V1.5.2 Changelog
 
-OPTIMIZE:
-- .serverinfo DONE
-- .userinfo DONE
+## Added
+- `.coinflip`
+- `.hex` & `.rgb`
+- `.gradient`
+- `.yt`
+- Image Modification commands (blur, rotate, text, remove background, convert, resize
 
-BACKEND CHANGES:
-- Correct server changed to "user" in .userinfo
-- Fixed Several grammatical errors
+## MODDING
+- EMod for E Event updated to use usernames
+- Database Reset and moved to `assistantdata`
 
-FIX:
-- Join Servers
-- .serverinfo channel count 
-- .userinfo with no params 
-- .wikipedia wrong parameter retrieval 
-- .ai 
-- .ipinfo 
-- Grammatical errors in .help command usage 
+small changelog, big results
 
 
 ## Note
