@@ -25,17 +25,26 @@ from modules.INFO import wiki
 
 from modules.TOOLS import ai
 from modules.TOOLS import ansiformat
+from modules.TOOLS import ball
 from modules.TOOLS import binary
 from modules.TOOLS import calc
 from modules.TOOLS import ccs
-from modules.TOOLS import ball
+from modules.TOOLS import coinflip
 from modules.TOOLS import base64encode
 from modules.TOOLS import base64decode
+from modules.TOOLS import hex
 from modules.TOOLS import ipinfo
 from modules.TOOLS import random
 from modules.TOOLS import react
 from modules.TOOLS import regional
+from modules.TOOLS import rgb
 from modules.TOOLS import rizz
+from modules.TOOLS import yt
+
+from modules.IMAGES import caption
+from modules.IMAGES import colorblind
+from modules.IMAGES import gradient
+from modules.IMAGES import imagemods
 
 from modules.FUN import activesite
 from modules.FUN import chatded
@@ -62,7 +71,8 @@ def tutlashell_input():
     while True:
         cmd = input("Tutla Shell > ")
         if cmd == "exit":
-             exit()
+            exit()
+        
 tutlashellThread = threading.Thread(target=tutlashell_input).start()
 
       

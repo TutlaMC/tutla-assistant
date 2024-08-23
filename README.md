@@ -5,23 +5,33 @@ Official Tutla Assistant Bot source code
 The Tutla Assitant bot has been a project I've worked on for a long time. Today, I decided to share this project.
 Tutla Assistant is a Discord Selfbot that has many QOL & Helpful commands, you can see all the commands by running `.help` on any channel.
 
-# 1.5.1 Changelog
-Note: V1.5 Cycle will just be bug fixes, terminal and modding. Mostly just bug fixes.
-## MODDING
-- EMod
-- Linux Mod
-- Added `data` for databases (will be worked on soon 👀)
+## UPDATE 1.4
+ADD:
+- Check premium (of other users) 
+- .serverinfo (for other servers using invite & id)
+- premium advantage on .activesite
+- .serverinfo alias: .inviteinfo, .server
+- Display aliases on help page for a command 
+- .userinfo: isbot?
+- Online Count for .serverinfo
+- Increase wikipedia output
 
-## ADDED
-- Terminal (Technically backend but will be bigger later on)
-- `.doxx`
-- `.version`
-- Made `.ai` premium
+OPTIMIZE:
+- .serverinfo DONE
+- .userinfo DONE
 
-## BUG FIXES
-- Fixed `.life` bug
-- Tried fixing `.dm` (it didn't work, but optimized)
-- `.timeout` error log fix
+BACKEND CHANGES:
+- Correct server changed to "user" in .userinfo
+- Fixed Several grammatical errors
+
+FIX:
+- Join Servers
+- .serverinfo channel count 
+- .userinfo with no params 
+- .wikipedia wrong parameter retrieval 
+- .ai 
+- .ipinfo 
+- Grammatical errors in .help command usage 
 
 
 ## Note
@@ -41,6 +51,8 @@ You require:
 - wikipedia
 - BeautifulSoup
 - pillow
+- rembg
+- yt_dlp
 
 **YOU DO NOT NEED DISCORD INSTALLED, IT USES DISCORD's API TO SEND AND GET REQUESTS**
 

@@ -8,7 +8,7 @@ ADMIN = "ADMIN"
 FUN = "Fun"
 CLIENT = "Client"
 TUTLA_ADMIN = "TUTLA ADMIN"
-
+IMAGES = "IMAGES"
 
 
 
@@ -52,7 +52,7 @@ class Command:
         self.aliases.append(self.name)
         self.toappend = name+' '
         for i in self.params:
-                self.toappend+= ' ['+i+'] '
+                self.toappend+= ' ['+i.upper()+'] '
         if self.isfree:
                 self.toappend+= '| (FREE COMMAND)'
         elif self.ispremium: self.toappend+= '| (PREMIUM ONLY)'

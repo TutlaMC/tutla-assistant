@@ -55,9 +55,4 @@ async def terminal(message):
                     else:
                         final+=f"\u001b[0;33m{i}\u001b[0;0m "
             await message.channel.send(termify(final))
-
-        
-                    
-
-
 Linux.on_message(terminal)
