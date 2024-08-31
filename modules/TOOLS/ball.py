@@ -36,4 +36,4 @@ async def ball_callback(CommandObject,message,self,params,command_data):
                                                                 "[mate](https://media.discordapp.net/stickers/1256231390576381952.gif?size=160&name=mate)",
                                                                 "[notsupport](https://media.discordapp.net/stickers/1192829101547991220.png?size=160&name=notsupport)"])+f"\n-# Prompt: {message.content}")
                     else: await message.channel.send("Invalid Argument for `.8ball`")                   
-ball_command = Command("8ball","Ultimate Decision Making Solution",ball_callback,TOOLS,aliases=["decide"],params=["STATEMENT"],isfree=True)
+ball_command = Command("8ball","Ultimate Decision Making Solution",ball_callback,TOOLS,aliases=["decide"],params=["STATEMENT"])

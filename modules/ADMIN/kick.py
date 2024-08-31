@@ -18,4 +18,4 @@ async def kick_callback(CommandObject,message,self,params,command_data):
                                 except Exception as e: await message.channel.send('I do not have permission to kick users')
                     else:
                         await message.channel.send(f'You do not have permission to kick users')
-kick_command = Command("kick","Kick a user off the server",kick_callback,ADMIN,aliases=["kickout"],isfree=True,usage="You can kick users with this command and you can also kick a user replying to their message")
+kick_command = Command("kick","Kick a user off the server",kick_callback,ADMIN,aliases=["kickout"],usage="You can kick users with this command and you can also kick a user replying to their message")

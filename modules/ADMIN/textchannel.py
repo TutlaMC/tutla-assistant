@@ -14,4 +14,4 @@ async def textchannel_callback(CommandObject,message,self,params,command_data):
                         else:
                             await message.channel.send('Invalid usage do: ```.textchannel [name] [emoji] ')
                     else: await message.channel.send('You do not have permissions to do this!')
-txtchannel_command = Command("textchannel","Create a text channel.",textchannel_callback,ADMIN,aliases=["txtchannel","channel"],isfree=True)
+txtchannel_command = Command("textchannel","Create a text channel.",textchannel_callback,ADMIN,aliases=["txtchannel","channel"])

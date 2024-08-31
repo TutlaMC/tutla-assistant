@@ -34,6 +34,4 @@ gradient_command = Command(
     gradient_callback, 
     CLIENT, 
     aliases=['linear'], 
-    params=["Width", "Height", "Color1 (hex)", "Color2 (hex)"],
-    isfree=True
-)
+    params=["Width", "Height", "Color1 (hex)", "Color2 (hex)"],)

@@ -1,6 +1,8 @@
+from modules.Utils import MainLogger
 commands2={
 
 }
+cmd_count = 0
 TOOLS = "Utilities/Tools"
 INFO = "Info"
 AI = "AI"
@@ -9,7 +11,7 @@ FUN = "Fun"
 CLIENT = "Client"
 TUTLA_ADMIN = "TUTLA ADMIN"
 IMAGES = "IMAGES"
-
+ECONOMY = "Economy"
 
 
 def section_add(name,command):
@@ -37,11 +39,11 @@ def get_command(command):
                                       return command_object
     if not final: return None
 class Command:
-    def __init__(self,name,description, method,category,aliases=[], params=[],isadmin =False,isfree=False,ispremium=False,usage=None):
+    def __init__(self,name,description, method,category,aliases=[], params=[],isadmin =False,ispremium=False,usage=None):
+        global cmd_count
         self.name = name
         self.description = description
         self.method = method
-        self.isfree=isfree
         self.category = category
         self.ispremium = ispremium
         self.aliases=aliases
@@ -53,10 +55,7 @@ class Command:
         self.toappend = name+' '
         for i in self.params:
                 self.toappend+= ' ['+i.upper()+'] '
-        if self.isfree:
-                self.toappend+= '| (FREE COMMAND)'
-        elif self.ispremium: self.toappend+= '| (PREMIUM ONLY)'
-        else: self.toappend+= '| (SERVER MEMBER ONLY)'
+        if self.ispremium: self.toappend+= '| (PREMIUM ONLY)'
         self.toappend+= ' | '+self.description
         
         self.usage_format = f".{self.name} {' '.join(param for param in self.params)}"
@@ -69,11 +68,12 @@ class Command:
 
         
         section_add(category,self)
+        cmd_count +=1
         
 
         
     async def run(self,message,discord_client,params,command_data):
-        print(f"Executed Command {params[0]}")
+        MainLogger.log(f"Executing Command {params[0]}")
         await self.method(self,message,discord_client,params,command_data)
 
 

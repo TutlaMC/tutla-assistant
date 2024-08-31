@@ -1,0 +1,6 @@
+discord.py-self
+wikipedia
+BeautifulSoup
+pillow
+rembg
+yt_dlp

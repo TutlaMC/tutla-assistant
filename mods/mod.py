@@ -8,7 +8,8 @@ class Mod:
         self.initial = None
         self.onMessage = None
         self.onDelete = None
-
+        self.onEdit = None
+        self.mainloop = None
         self.bot = None
 
         mods.append(self)
@@ -19,4 +20,8 @@ class Mod:
         self.onMessage = function
     def on_delete(self,function):
         self.onDelete = function
+    def on_edit(self,function):
+        self.onEdit = function
+    def on_mainloop(self,function):
+        self.onMainloop = function
     

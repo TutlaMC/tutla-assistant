@@ -39,4 +39,5 @@ async def caption_callback(CommandObject,message,self,params,command_data):
             image_binary.seek(0)
             await message.channel.send(file=File(fp=image_binary, filename='image_with_caption.png'))
 
-caption_command = Command("caption","Add caption to an image",caption_callback,IMAGES,aliases=['addcaption'],params=["TEXT"],ispremium=True)
+caption_command = Command("caption","Add caption to an image",caption_callback,IMAGES,aliases=['addcaption'],params=["TEXT"])
+

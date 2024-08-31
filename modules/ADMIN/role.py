@@ -13,4 +13,4 @@ async def role_callback(CommandObject,message,self,params,command_data):
                                          failed = True
                                          await message.channel.send(f'I do not have permission to add roles to members, error log:```python\n{e}```')
     else: await message.channel.send('You do not have permission to add roles to members')
-role_command = Command("role","role a user off the server",role_callback,ADMIN,aliases=["giverole"],usage="Give multiple roles to multiple users irrespecitvely",isfree=True)
+role_command = Command("role","role a user off the server",role_callback,ADMIN,aliases=["giverole"],usage="Give multiple roles to multiple users irrespecitvely")

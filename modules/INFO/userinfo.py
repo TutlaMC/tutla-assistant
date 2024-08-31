@@ -31,8 +31,13 @@ async def userinfo_callback(CommandObject,message,self,params,command_data):
                     channel = await self.fetch_channel(message.channel.id)
                     for user in message.mentions:
                             await userinfo_main(user,message.channel)
-                    if len(message.mentions) == 0:
-                            await userinfo_main(message.author, message.channel)
+                    try:
+                        if len(message.mentions) == 0 and len(params) > 1 and params[1].isdigit():
+                            e = await self.fetch_user(int(params[1]))
+                            if e: await userinfo_main(e,message.channel)
+                        else:await userinfo_main(message.author, message.channel)
+                    except Exception: await userinfo_main(message.author, message.channel)
+                    
                             
 
 

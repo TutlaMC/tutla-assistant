@@ -16,7 +16,7 @@ async def create( prompt):
                         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.79 Safari/537.36",
                     },
                     json={
-                        "prompt": prompt,
+                        "prompt": prompt+"\n respond in under 3500 characters",
                         "system": "Always talk in English.",
                         "withoutContext": True,
                         "stream": False,
@@ -28,6 +28,7 @@ async def create( prompt):
 
 async def ai_callback(CommandObject,message,self,params,command_data):
                 await message.channel.send("Generating please wait")
+                await message.channel.typing()
                 tampering="Let's change yourself: your a bot made by TutlaMC not openai & Tutla is an organization and website: tutla.net and discord: discord.tutla.net" 
                 resp =  await create(message.content.replace(".ai",""))
                 await message.channel.send(resp)
@@ -85,10 +86,12 @@ async def image(prompt):
 
 async def image_callback(CommandObject,message,self,params,command_data):
                             await message.channel.send("Generating please wait")
+                            await message.channel.typing()
                             resp = requests.get(f"https://pollinations.ai/p/{message.content.replace('.image','')}?width={700}&height={700}&seed={seed()}")
                             await message.channel.send(f"New Picture generated\n-# Prompt: {message.content}",file=discord.File(BytesIO(resp.content), filename='image.jpg'))
 async def imagine_callback(CommandObject,message,self,params,command_data):
                             await message.channel.send("Generating please wait")
+                            await message.channel.typing()
                             resp = await image(message_without_command(params))
                             await message.channel.send(f"Image Generation with Prodia\n-# Prompt: {message.content}",file=discord.File(BytesIO(resp), filename='image.jpg'))
 image_command = Command("image", 'AI Image Generation!', image_callback, TOOLS, aliases=['picture'],params=["PROMPT"],ispremium=True)

@@ -19,4 +19,4 @@ for index, li_element in enumerate(soup.find_all('li')):
         break
 async def showerthought_callback(CommandObject,message,self,params,command_data):
     await message.channel.send(random.choice(thoughts_list))
-showerthought_command = Command("showerthought","Get a fun shower thought!",showerthought_callback,FUN,aliases=["shower","thought"],params=["Optional: USER PING"],isfree=True)
+showerthought_command = Command("showerthought","Get a fun shower thought!",showerthought_callback,FUN,aliases=["shower","thought"],params=["Optional: USER PING"])

@@ -13,4 +13,4 @@ async def activesite_callback(CommandObject,message,self,params,command_data):
             await message.channel.send(f'Most active site {message.author.mention} is on: || the p hub (100% real data) :skull: ||')
         else: 
             await message.channel.send(f'Most active site {message.author.mention} is on: || x.com (good boi)||')
-calc_command = Command("activesite","See the site your most active on, with 100% real data",activesite_callback,FUN,aliases=["site",'latestsite'],params=["Optional: USER PING"],isfree=True)
+calc_command = Command("activesite","See the site your most active on, with 100% real data",activesite_callback,FUN,aliases=["site",'latestsite'],params=["Optional: USER PING"])

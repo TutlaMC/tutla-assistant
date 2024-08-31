@@ -32,7 +32,6 @@ async def recieve_message(message):
 
         if str(message.author.name) in to_update: 
             to_update[str(message.author.name)] +=1
-            print(to_update)
         else:
              to_update[str(message.author.name)] = 1
              

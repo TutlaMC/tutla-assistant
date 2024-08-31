@@ -10,4 +10,4 @@ async def base64decode_callback(CommandObject,message,self,params,command_data):
                     except base64.binascii.Error:
                         await message.channel.send('Invalid base64 encoding.')
                     
-base64decode_command = Command("base64decode","Enocde in base64",base64decode_callback,TOOLS,aliases=["decode"],params=["TEXT"],isfree=True)
+base64decode_command = Command("base64decode","Enocde in base64",base64decode_callback,TOOLS,aliases=["decode"],params=["TEXT"])

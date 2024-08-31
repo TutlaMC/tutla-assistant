@@ -23,7 +23,9 @@ async def serverinfo_callback(CommandObject,message,self,params, command_data):
                     owner = f'Owner ID: {server.owner_id}\n'
                     owner_name = f'Owner Name: {own.name}\n'
                     owner_creation_date = f'Owner Creation Date: {own.created_at}\n' 
-                    await channel.send(f'''```yml\n {name}{sid}{members}{cd}{channel_count}-------OWNER INFO-------\n{owner}{owner_name}{owner_creation_date}\nYou can use .userinfo <@{own.id}> to get more data```''')
+                    await channel.send(f'''```yml\n{name}{sid}{members}{cd}{channel_count}-------OWNER INFO-------\n{owner}{owner_name}{owner_creation_date}\nYou can use .userinfo <@{own.id}> to get more data```''')
                     if not con: free_access = True
 
+async def membercount_callback(CommandObject,message,self,params, command_data): await message.channel.send(f"{message.channel.guild.online_count}/{str(message.channel.guild.member_count)}")
+membercount_command = Command("membercount", 'Outputs the servercount', membercount_callback, INFO, aliases=['servercount', 'count',"mc"])
 serverinfo_command = Command("serverinfo", 'Lists information about the server', serverinfo_callback, INFO, aliases=['serverinfo', 'server',"inviteinfo"])

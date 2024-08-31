@@ -13,5 +13,5 @@ async def tobinary_callback(CommandObject,message,self,params,command_data):
 
     await message.channel.send(t2b(message_without_command(params)))
 
-binary_command = Command("binary2text","Decode Binary",binary_callback,TOOLS,aliases=["binary","frombinary","b2t"],params=["BINARY"],isfree=True)
-tobinary_command = Command("text2binary","Encode Binary",tobinary_callback,TOOLS,aliases=["tobinary","t2b"],params=["TEXT"],isfree=True)
+binary_command = Command("binary2text","Decode Binary",binary_callback,TOOLS,aliases=["binary","frombinary","b2t"],params=["BINARY"])
+tobinary_command = Command("text2binary","Encode Binary",tobinary_callback,TOOLS,aliases=["tobinary","t2b"],params=["TEXT"])

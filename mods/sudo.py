@@ -18,6 +18,9 @@ async def terminal(message):
     if len(params) < 1: return False
     if params[0] == "sudo":
         if params[1] == "cd":
+            if "tut" in message.content: 
+                await message.channel.send("Nah Tutla got a life unlike you")
+                return False
             folders = params[2].split('/') if params[2].split('/')[1:] != "" else params[2].split('/')[1:]
             if not folders[len(folders)-1][-4:] in [".htm",".txt",".css",".mp4",".mp3"]:
                 file = None

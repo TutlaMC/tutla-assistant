@@ -1,9 +1,9 @@
 from ..Module import *
-from ..Utils import version
+from ..Utils import version, getCmdCount
 async def help_callback(CommandObject,message,self,params,command_data):
                         pages = []
                         req = "------------------------ REQUIREMENT ------------------------\nYou need to join the Tutla Discord (in bio) to use most of the commands"
-                        nmessage = f'''```yml\n Hi I'm the Tutla Assistance {version} and can run the following: \n'''
+                        nmessage = f'''```yml\n Hi I'm the Tutla Assistance {version} and can run the following {getCmdCount()} Commands: \n'''
                         
                         def append_page(content,new_line = False):
                             
@@ -63,4 +63,4 @@ async def help_callback(CommandObject,message,self,params,command_data):
                             await message.channel.send(nmessage)
 
                                
-help_command = Command("help","Opens up this menu",help_callback,CLIENT,aliases=['usage','what'],params=['PAGE NUMBER'],usage="The page number must always be an integer or you can enter a command to see it's usage.",isfree=True)
+help_command = Command("help","Opens up this menu",help_callback,CLIENT,aliases=['usage','what',"commands","command"],params=['PAGE NUMBER'],usage="The page number must always be an integer or you can enter a command to see it's usage.")

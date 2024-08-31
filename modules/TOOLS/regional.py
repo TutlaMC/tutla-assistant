@@ -31,4 +31,4 @@ async def regional_callback(CommandObject,message,self,params,command_data):
 
 
 
-regional_command = Command("regional","REGIONAL TEXT",regional_callback,TOOLS,aliases=["toregional"],params=["TEXT"],isfree=True)
+regional_command = Command("regional","REGIONAL TEXT",regional_callback,TOOLS,aliases=["toregional"],params=["TEXT"])

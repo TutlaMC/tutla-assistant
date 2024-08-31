@@ -14,4 +14,4 @@ async def voicechannel_callback(CommandObject,message,self,params,command_data):
                         else:
                             await message.channel.send('Invalid usage do: ```.voicechannel [name] [emoji] ```')
                     else: await message.channel.send('You do not have permissions to do this!')
-txtchannel_command = Command("voicechannel","Create a voice channel.",voicechannel_callback,ADMIN,aliases=["vc","voicechat"],isfree=True)
+txtchannel_command = Command("voicechannel","Create a voice channel.",voicechannel_callback,ADMIN,aliases=["vc","voicechat"])
