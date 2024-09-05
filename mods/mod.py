@@ -23,5 +23,5 @@ class Mod:
     def on_edit(self,function):
         self.onEdit = function
     def on_mainloop(self,function):
-        self.onMainloop = function
+        self.mainloop = function
     

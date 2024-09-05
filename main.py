@@ -21,6 +21,8 @@ from mods import mod
 
 MainLogger.log("Loading all modules",style="execution")
 
+from modules.TUTLA import tutlasearch
+
 from modules.CLIENT import admin
 from modules.CLIENT import changelog
 from modules.CLIENT import dm
@@ -32,8 +34,10 @@ from modules.CLIENT import reload
 from modules.CLIENT import say
 from modules.CLIENT import version
 
-
+from modules.ECONOMY import coins
 from modules.ECONOMY import daily
+from modules.ECONOMY import leaderboard
+from modules.ECONOMY import rob
 from modules.ECONOMY import xp
 
 from modules.INFO import ipinfo
@@ -46,18 +50,24 @@ from modules.TOOLS import afk
 from modules.TOOLS import ai
 from modules.TOOLS import ansiformat
 from modules.TOOLS import ball
+from modules.TOOLS import base64encode
+from modules.TOOLS import base64decode
 from modules.TOOLS import binary
 from modules.TOOLS import calc
 from modules.TOOLS import ccs
 from modules.TOOLS import coinflip
-from modules.TOOLS import base64encode
-from modules.TOOLS import base64decode
+from modules.TOOLS import dice
+from modules.TOOLS import giveaway
 from modules.TOOLS import hex
+from modules.TOOLS import player
+from modules.TOOLS import poll
 from modules.TOOLS import random
 from modules.TOOLS import react
 from modules.TOOLS import regional
 from modules.TOOLS import rgb
 from modules.TOOLS import rizz
+from modules.TOOLS import translate
+from modules.TOOLS import words
 from modules.TOOLS import yt
 
 from modules.IMAGES import caption
@@ -100,8 +110,10 @@ def tutlashell_input():
 async def mainloop(eself):
         MainLogger.log("Refreshing Tutla Assistance", style="execution")
         self = eself
+        MainLogger.log("Running Mod mainloops", style="execution")
         for mode in mod.mods: 
-            if mode.mainloop != None: mode.mainloop(self)
+            if mode.mainloop != None:
+                await mode.mainloop(self)
         premium_reload()
         ban_reload()
         MainLogger.log("Refreshed Tutla Assistance", style="success")
@@ -180,7 +192,7 @@ class Client(discord.Client):
                         params = message.content.split() 
                         if str(message.content.split()[0].lower().replace('.','')) in command_object.aliases:  # 1. Gets The first word in lowercase 2. Removes the "." 3. Finds it in aliases as the command name is also in aliases
                             if not db.userExists(message.author.id):
-                                db.add_user(message.author.id,premium=premium,banned=banned,mod=getAdminLevel(message.author.id))
+                                db.add_user(message.author.id,premium=premium,banned=banned,mod=getAdminLevel(message.author.id),coins=0)
                             else: db.edit_user(message.author.id,premium=premium,banned=banned,mod=getAdminLevel(message.author.id))
                             
 
@@ -231,7 +243,7 @@ class Client(discord.Client):
         if len(message.mentions)>=1:
             for i in message.mentions:
                 if i.id in afk_users:
-                    await message.channel.send("User is afk, please shut up")
+                    await message.channel.send(f"User is afk, for `{afk_users[i.id]}`")
             if str(self.user.id) in message.content:
                 cc = ["CC Hack: You can get powerful hacks on the CC Scripting Forum that bypass various Minecraft anticheats such as Grim and Astro","CC Hack: Try `on tick on tick say 'blue screen'` in CCS to see a blue screen","CC Hack: You can easily get a cape by applying for mod @ the CC Discord (you'd get accepted if you weren't autistic)","CC Hack: Use the I-No-oNe's AutoCC Updater to automatically update ClickCrystals"]
                 life = ["Lifehack: To getter jawline you can start mewing.", "Lifehack: Meditate when on you're on bed. It'll be a win-win.","Lifehack: To make yourself harder you can try kegel exercises","Lifehack: Get a clean pant-hook by folding up thrice and then that fold downwards until inside.","Lifehack: Mentally curing yourself (by imagining your being cured as if your drank a medicine) is the cheapest, natural and best option","Lifehack: You can increase the size of yo gyatt by doin gyatt exercises"]

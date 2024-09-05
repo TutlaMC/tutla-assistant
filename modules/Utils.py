@@ -5,19 +5,25 @@ from mods import mod
 from assistantdata import db
 from datetime import datetime
 import sqlite3
+import os
 from aiohttp import ClientSession, ClientError
 
 premium_list = []
 banlist=[]
-afk_users = []
+afk_users = {}
+fonts= []
 
 # SETTINGS
-version = 'V1.5.3'
+version = 'V1.5.4'
 dev_mode = False
 self_bot = False
 
 true = True
 false = False
+
+for i in os.listdir('assistantdata/fonts'):
+       fonts.append(i.replace('.ttf',''))
+
 def getCmdCount():
     from modules.Module import cmd_count
     return cmd_count
@@ -195,3 +201,10 @@ def execute(cmd):
             return db.printDB()
     else:
          return f"`{cmd}` not found"
+def paramExists(p,n):
+    if len(p) >= n+1:
+        return True
+    else: return False
+def hasCoins(user_id, coins):
+    if db.getData(user_id,"coins") >= coins: return True
+    else: return False

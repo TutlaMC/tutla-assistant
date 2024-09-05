@@ -17,12 +17,13 @@ def initialize_db():
                             slowmode DATETIME,
                             last_command TEXT,
                             daily DATETIME,
-                            xp INTEGER)''')
+                            xp INTEGER,
+                            coins INTEGER)''')
         conn.commit()
 
 initialize_db()
 
-def add_user(user_id: int, member=False, premium=False, banned=False, mod=0, aura=1000, slowmode=None, last_command=" ",daily=None,xp=10):
+def add_user(user_id: int, member=False, premium=False, banned=False, mod=0, aura=1000, slowmode=None, last_command=" ",daily=None,xp=10,coins=0):
     if slowmode is None:
         slowmode = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     if daily is None:
@@ -32,9 +33,9 @@ def add_user(user_id: int, member=False, premium=False, banned=False, mod=0, aur
         if last_command == " ": last_command = getData(user_id, "last_command")
         with sqlite3.connect('assistantdata/users.db') as conn:
             cursor = conn.cursor()
-            cursor.execute('''INSERT OR REPLACE INTO users (user_id, member, premium, banned, mod, aura, slowmode, last_command, daily, xp)
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? )''',
-                        (user_id, member, premium, banned, mod, aura, slowmode, last_command,daily,xp))
+            cursor.execute('''INSERT OR REPLACE INTO users (user_id, member, premium, banned, mod, aura, slowmode, last_command, daily, xp, coins)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )''',
+                        (user_id, member, premium, banned, mod, aura, slowmode, last_command,daily,xp,coins))
             conn.commit()
         Utils.DBLogger.log("Added user", style="success")
     except Exception as e:
@@ -79,6 +80,12 @@ def userExists(user_id):
     cursor.close()
     connection.close()
     return result[0] > 0
+def add_coins(user_id,coins):
+    if userExists(user_id):
+        if getData(user_id,"coins") != None:
+            edit_user(user_id,coins=getData(user_id,"coins")+coins)
+        else: edit_user(user_id,coins=coins)
+    else: add_user(user_id)
 def getData(user_id: int, column_name: str):
     with sqlite3.connect('assistantdata/users.db') as conn:
         cursor = conn.cursor()
@@ -118,13 +125,24 @@ def printDB():
     return final
 
 
-
+def get_column_data(look):
+    connection = sqlite3.connect('assistantdata/users.db')
+    cursor = connection.cursor()
+    
+    query = f"SELECT user_id, {look} FROM users"
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    
+    result = {row[0]: row[1] for row in rows}
+    
+    connection.close()
+    return result
 def add_column_to_table():
     connection = sqlite3.connect('assistantdata/users.db')
     cursor = connection.cursor()
     
     # Define the SQL statement to add a new column
-    sql = "ALTER TABLE users ADD COLUMN xp INTEGER"
+    sql = "ALTER TABLE users ADD COLUMN coins INTEGER"
     
     # Execute the SQL statement
     cursor.execute(sql)

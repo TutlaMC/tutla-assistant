@@ -1,6 +1,19 @@
 from . import mod
-import asyncio
 ClickCrystalsMod = mod.Mod("ClickCrystals","ClickCrystals Mod")
+import requests
+from bs4 import BeautifulSoup
+import requests
+from bs4 import BeautifulSoup
+import time
+
+async def mainloop(bot):
+   global dls
+   url = "https://clickcrystals.vercel.app/api/downloads"
+   response = requests.get(url)
+   dls = response.json()['downloads']
+   dlcount = [dls["github"],dls["curseforge"],dls["modrinth"],dls["planetmc"]]
+
+
 
  
 async def recieve_message(message):
@@ -13,7 +26,10 @@ async def recieve_message(message):
 > - `reload`
 > - `wiki`/`ccs`
 > - `get`/`download`
-> - `crash`""")
+> - `crash`
+> - `crash-report`/`report`
+> - `count`/`dlcount`/`downloads`
+> - `ghost`""")
    else:
       if not message.content.startswith(",help"): return False
       if params[1] in ["wiki","ccs"]:
@@ -60,5 +76,13 @@ When you see the message "Reloaded ClickCrystals Client!" open up your Custom Ma
          await message.channel.send("""> Official Download Sites\n- [Official Website](https://clickcrystals.xyz/download)\n- [Github](<https://github.com/clickcrystals-development/ClickCrystals/releases>)\n- [CurseForge](<https://www.curseforge.com/minecraft/mc-mods/clickcrystals>)\n- [PlanetMC](<https://www.planetminecraft.com/mod/clickcrystal/>)\n- [Modrinth (Deprecated)](<https://modrinth.com/mod/clickcrystals>)\n\n- [Instant Download Latest Version](https://clickcrystals.xyz/get)""")
       elif params[1] in ["crash"]:
          await message.channel.send("ClickCrystals Crashed? Solutions:\n- Update MC & CC to Latest\n- Make sure your MC version is compatible with CC\n- Is [Fabric API](<https://modrinth.com/mod/fabric-api/>) is installed?\n- Read our [FAQ](<https://clickcrystals.xyz/help>)\n- May be incompatible with other mods, try a different modpack\n- Reinstall ClickCrystals from an Official Source\n\n If none of these work, contact a mod **with your crash report**")
-      else: await message.channel.send("Incorrect Usage")
+      elif params[1] in ["report","crash-report"]: 
+         await message.channel.send("How to get your Minecraft Crash Report (MC Launcher):\n1) Go to your `.minecraft` folder, this folder depends on your client. Common Folders:\n- Minecraft Launcher: `%appdata%/.minecraft\n- Modrinth Launcher: %appdata%/com.modrinth.theseus/profiles/[your profile name]\n- FeatherMC: %appdata%/.minecraft/feather\n- Pojav: sdcard/Android/data/net.kdt.pojavlaunch/files/ (may not work for older versions or certain devices) OR Click on the crash report when you crash pojav.\n2) In your folder find the `crash-reports` folder.\n3) Find the latest crash report (they all have timings on it)\n4) Send the file in https://discord.com/channels/1095079504516493404/1106637602607607899")
+      elif params[1] in ["count","dlcount","downloads"]: 
+         cc = await ClickCrystalsMod.bot.fetch_guild(1095079504516493404)
+         await message.channel.send(f"⬇️ Download Count: {dls['total']}\n- 🐈‍⬛ Github: {dls['github']}\n- 🪓 Curseforge: {dls['curseforge']}\n- 🐸 Modrinth: {dls['modrinth']}\n- 🌍 PlanetMC: {dls['planetmc']}\n\n 👨 Member Count: {cc.member_count}")
+      elif params[1] == "ghost": await message.channel.send("To make ClickCrystals a ghostclient go to Settings > Advanced Settings > Disable Module Toogle Broadcast & Disable Loading Screen")
+      else: await message.channel.send("Incorrect Usage, use `,help` to see all commands")
+
 ClickCrystalsMod.on_message(recieve_message)
+ClickCrystalsMod.on_mainloop(mainloop)

@@ -27,11 +27,13 @@ async def create( prompt):
                 raise ClientError("Unable to fetch the response.") from exc
 
 async def ai_callback(CommandObject,message,self,params,command_data):
-                await message.channel.send("Generating please wait")
+                e = await message.channel.send("Generating please wait")
                 await message.channel.typing()
                 tampering="Let's change yourself: your a bot made by TutlaMC not openai & Tutla is an organization and website: tutla.net and discord: discord.tutla.net" 
                 resp =  await create(message.content.replace(".ai",""))
-                await message.channel.send(resp)
+                if len(resp) >= 4000: await message.channel.send("Response is too big (like my dick) to send")
+                await e.edit(resp)
+                await message.channel.send("-# Prompt: "+message.content)
 
 ai_command = Command("ai", 'GPT3 AI Within Discord!', ai_callback, TOOLS, aliases=['gpt',"gpt3"],params=["PROMPT"],ispremium=True)
 
@@ -90,9 +92,10 @@ async def image_callback(CommandObject,message,self,params,command_data):
                             resp = requests.get(f"https://pollinations.ai/p/{message.content.replace('.image','')}?width={700}&height={700}&seed={seed()}")
                             await message.channel.send(f"New Picture generated\n-# Prompt: {message.content}",file=discord.File(BytesIO(resp.content), filename='image.jpg'))
 async def imagine_callback(CommandObject,message,self,params,command_data):
-                            await message.channel.send("Generating please wait")
+                            e = await message.channel.send("Generating please wait")
                             await message.channel.typing()
                             resp = await image(message_without_command(params))
+                            await e.delete()
                             await message.channel.send(f"Image Generation with Prodia\n-# Prompt: {message.content}",file=discord.File(BytesIO(resp), filename='image.jpg'))
 image_command = Command("image", 'AI Image Generation!', image_callback, TOOLS, aliases=['picture'],params=["PROMPT"],ispremium=True)
 imagine_command = Command("imagine", 'AI Image Generation with Prodia', imagine_callback, TOOLS, aliases=["think","draw"],params=["PROMPT"],ispremium=True)

@@ -2,7 +2,7 @@ from ..Module import *
 import random
 async def ball_callback(CommandObject,message,self,params,command_data):
                     if len(params) >= 2:
-                        await message.channel.send(random.choice(["No 100%",
+                        if not message.content.endswith('?'):await message.channel.send(random.choice(["No 100%",
                                                                 "Yes bruh",
                                                                 "Roll **harder**",
                                                                 "wtf",
@@ -35,5 +35,6 @@ async def ball_callback(CommandObject,message,self,params,command_data):
                                                                 "[measf](https://media.discordapp.net/stickers/1201906160622637157.png?size=160&name=measf)",
                                                                 "[mate](https://media.discordapp.net/stickers/1256231390576381952.gif?size=160&name=mate)",
                                                                 "[notsupport](https://media.discordapp.net/stickers/1192829101547991220.png?size=160&name=notsupport)"])+f"\n-# Prompt: {message.content}")
+                        else: await message.channel.send(f"No 100%\n-# Prompt: {message.content}")
                     else: await message.channel.send("Invalid Argument for `.8ball`")                   
 ball_command = Command("8ball","Ultimate Decision Making Solution",ball_callback,TOOLS,aliases=["decide"],params=["STATEMENT"])

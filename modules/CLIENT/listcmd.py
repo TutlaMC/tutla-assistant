@@ -1,5 +1,8 @@
 from ..Module import * 
 from ..Utils import *
+import os
+
+
 async def list_callback(CommandObject,message,self,params,command_data):
     if len(params) >= 2:
         if params[1] == "mods":
@@ -31,6 +34,12 @@ async def list_callback(CommandObject,message,self,params,command_data):
                 nmessage = 'In servers:\n```yaml\n'
                 for i in self.guilds:
                             nmessage+='- '+i.name+'\n'
+                nmessage+='```'
+                await message.channel.send(nmessage)
+        elif params[1] == "fonts":
+                nmessage = 'Fonts:\n```yaml\n'
+                for i in fonts:
+                            nmessage+='- '+i+'\n'
                 nmessage+='```'
                 await message.channel.send(nmessage)
         else: await message.channel.send(CommandObject.usage)

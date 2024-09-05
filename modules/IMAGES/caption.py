@@ -4,8 +4,7 @@ from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 from discord import File
 def add_caption_to_image(image_data, caption, box_height):
-    print(caption)
-    font_path = "assistantdata/font.ttf"
+    font_path = "assistantdata/fonts/font.ttf"
     image = Image.open(BytesIO(image_data))
     draw = ImageDraw.Draw(image)
 

@@ -12,10 +12,11 @@ CLIENT = "Client"
 TUTLA_ADMIN = "TUTLA ADMIN"
 IMAGES = "IMAGES"
 ECONOMY = "Economy"
-
+TUTLA = "Tutla"
 
 def section_add(name,command):
     global commands2
+    name = name.upper()
     section_name = "------- "+name+" --------\n"
     
     if name in commands2:        

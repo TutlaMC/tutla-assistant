@@ -43,7 +43,6 @@ async def aura_command(message):
                     
     for i in aura_loss_words:
         if i in message.content:
-            print(i)
             await aura(500,message)
 
 auraMod.on_message(aura_command)

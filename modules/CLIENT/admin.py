@@ -59,6 +59,19 @@ async def console_callback(CommandObject,message,self,params,command_data):
                 db.edit_user(message.mentions[0].id,banned=False)
                 ban_reload()
                 await message.channel.send(f"Unbanned {message.mentions[0].mention}!")
+        elif params[1] == "db" and getAdminLevel(message.author.id) > 3:
+            if params[2] == "edit":
+                if params[4] == "xp":
+                    db.edit_user(int(params[3]),xp=int(params[5]))
+                elif params[4] == "aura":
+                    db.edit_user(int(params[3]),aura=int(params[5]))
+                elif params[4] == "premium":
+                    db.edit_user(int(params[3]),premium=bool(params[5]))
+                elif params[4] == "last_command":
+                    db.edit_user(int(params[3]),premium=params[5])
+                elif params[4] == "coins": db.edit_user(int(params[3]),coins=int(params[5]))
+                
+
 
 
     
