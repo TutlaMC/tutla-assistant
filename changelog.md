@@ -1,38 +1,42 @@
-# Update V1.5.3
+# Update V1.5.4
 
 ## ADDED
-- DB: `db.py` via `sqllite3`
-- Logging System (class Logger in `modules/Utils.py`)
-- Output Logging `log.log`
-- Mainloop, refreshes Tutla Assistance every 5 minutes
-- Token is now in environment variables, not file
+- Added a *reason* for `.afk`
+- Tutla Currency
+- Fonts for `.imgtext`
+- DB Modification in `.panel`
+- Font `.list`
+- Slowmode for `.daily`
+- `fake.py` 👀
+- Better `.ai`
+- "special" new `.8ball` feature (for devs :yas:)
 
-- Pinging it gives a random tip
+- **TUTLA** Section
+- `.coins` to check your current balance
+- `.leaderboard` Tutla leaderboard for coins and XP
+- `.giveaway` & `.gend` for manual giveaway management
+- `.player` Music Player (Premium)
+- `.poll` Create a poll using Tutla Assistance
+- `.translate` Translate text
+- `.word` Get's definition, example and more about the word
+- `.rob`
+- `.w2t` White2Transparent
+- `.kernel` Cook your images
+- `.getcolors` Gets all the colors in an image
+- `.filtercolors` Filter colors off an image
+- `.speechbubble` Discord Speechbuble meme
+- `.tutlasearch` Search the Tutla Website
+- `.dice`
+- `.pronounce`
 
-- `.list`: New command that replaces `.inservers` & `.listmods` and also adds premium users
-- `.help` menu updated to display number of commands
-- `.daily`: Gives your daily XP and Aura
-- `.afk`: AFK Command
-- `.tfi`: Extract Text from an image
-- `.panel`: Tutla Administrator Panel
-- `.infinitecraft`: Infinitecraft on Discord!
-- `.changelog`: Returns Changelog
-- Readded `.antinpc` # 2nd Command Ever!
-- `.life` is now `.ghostping`
-- Categorized & Renamed several commands
 
-*Theres so many changes this updated I can't list them all! Read them @ https://github.com/TutlaMC/tutla-assistant/commits*
-
-## REMOVED
-- Example Command
-- "Free" Commands, now any user can use commands (no longer need to be Tutla Member)
-- ChatBot mod
-- EMod Logs
+## BUG FIXES
+- Aura Swear word logging
+- `.ghostping` not working
+- `.calc` not working
+- `.daily` spam bug
+- `.imgtext` and other image commands not working
 
 ## MODDING
-- `self.mainloop`: Mainloop
-- `self.on_edit`: On message edit trigger for modding
-
 - AuraMod: lose and gain aura
-- EMod: `.esnipe` and `.snipe` gets 3 History
-- ClickCrystalsMod: Updated Site links
+- ClickCrystalsMod: Many new `,help` commands
