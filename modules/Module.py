@@ -55,7 +55,7 @@ class Command:
         self.aliases.append(self.name)
         self.toappend = name+' '
         for i in self.params:
-                self.toappend+= ' ['+i.upper()+'] '
+                self.toappend+= i.upper()
         if self.ispremium: self.toappend+= '| (PREMIUM ONLY)'
         self.toappend+= ' | '+self.description
         

@@ -1,9 +1,13 @@
 from ..Module import * 
+from ..Utils import *
+import requests
+from io import BytesIO
+from discord import File
 import random
 
 async def random_callback(CommandObject,message,self,params,command_data):
 
-                    words = message.content.split()
+                    words = params
                     if len(words) >= 2:
                         if words[1] == 'number':
                             if len(words) >= 3:
@@ -31,8 +35,19 @@ async def random_callback(CommandObject,message,self,params,command_data):
                                             await message.channel.send('Selected: '+random.choice(members).name)
                                     else: await message.channel.send('No members in guild')
                             else: await message.channel.send('Guild not found.')
+                        elif words[1] == "image":
+                            api_url = f'https://picsum.photos/512/512'
+                            r = requests.get(api_url)
+
+                            await message.channel.send(f"Random Image:",file=File(fp=BytesIO(r.content),filename='image.jpg'))
+                        elif words[1] == "pfp":
+                            api_url = f'https://loremflickr.com/320/240'
+                            r = requests.get(api_url)
+
+                            await message.channel.send(f"Random PFP:",file=File(fp=BytesIO(r.content),filename='pfp.jpg'))
                         else:
                             await message.channel.send('Please use .help and see the usage of this command')
+
                     else:
                             await message.channel.send('Please use .help and see the usage of this command')
-random_command = Command("random", 'Ultimate randomization. Choose between random users and number.', random_callback, TOOLS, aliases=['rand'],params=["number/user","if word 1 is number: NUMBER","optional: -mention"])
+random_command = Command("random", 'Ultimate randomization. Choose between various random options.', random_callback, TOOLS, aliases=['rand'],params=["number/user/image/pfp","if word 1 is number: NUMBER","optional: -mention"])

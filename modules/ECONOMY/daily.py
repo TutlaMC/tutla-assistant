@@ -4,11 +4,8 @@ from assistantdata import db
 from random import randint
 async def daily_callback(CommandObject,message,self,params,command_data):
 
-    if isInSlowmode(message.author.id,15): 
-        await message.channel.send("nice try mf (or try again in 15 seconds)")
-        return False
     if db.getData(message.author.id,"last_command") == "daily": 
-        await message.channel.send("nice try mf (or try again in 15 seconds)")
+        await message.channel.send("nice try mf")
         return False
     last_daily = db.getData(message.author.id,"daily")
     now = datetime.now()
@@ -45,4 +42,4 @@ async def daily_callback(CommandObject,message,self,params,command_data):
         e = '\nBonus: 1500 for premium' if command_data['premium'] else ''
         await message.channel.send(f"Your daily:\nAura: {str(nar)}\nXP:{str(nxp)}{e}")
     else: await message.channel.send(f"You have already claim your daily, you can claim again in {str(int(((43200-seconds_diff)/60)/60))} hours")
-reload_command = Command("daily", 'Tutla Assistance daily', daily_callback, ECONOMY, aliases=['v'])
+daily_command = Command("daily", 'Tutla Assistance daily', daily_callback, ECONOMY, aliases=['dly','pls daily'])

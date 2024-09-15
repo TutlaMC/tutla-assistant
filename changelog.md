@@ -1,42 +1,33 @@
-# Update V1.5.4
+# Update V1.5.5
 
 ## ADDED
-- Added a *reason* for `.afk`
-- Tutla Currency
-- Fonts for `.imgtext`
-- DB Modification in `.panel`
-- Font `.list`
-- Slowmode for `.daily`
-- `fake.py` 👀
-- Better `.ai`
-- "special" new `.8ball` feature (for devs :yas:)
+- `.report`: Report Bugs/Issues & suggestions
+- `.code`: Learn coding with roasting people!
+- `.currency`: Convert Currencies
+- `.freaky`: 𝓯𝓻𝓮𝓪𝓴𝔂 text
+- `.qr`: Generate a qr code
+- `.unsplash`: Search Unsplash images
+- `.weather`: Get weather data for a city
+- `.cartoon`: generates a cartoon character for the text
+- `.scale`: Get an image scale for pixels
+- `.fact`: Gets a random fact
+- `.quote`: Gets a quote
+- `.furry`: Furry pics
+- `.infiniterps`: Play rock paper scissors with anything!
+- `.c4` & `.tictactoe`: Minigames
 
-- **TUTLA** Section
-- `.coins` to check your current balance
-- `.leaderboard` Tutla leaderboard for coins and XP
-- `.giveaway` & `.gend` for manual giveaway management
-- `.player` Music Player (Premium)
-- `.poll` Create a poll using Tutla Assistance
-- `.translate` Translate text
-- `.word` Get's definition, example and more about the word
-- `.rob`
-- `.w2t` White2Transparent
-- `.kernel` Cook your images
-- `.getcolors` Gets all the colors in an image
-- `.filtercolors` Filter colors off an image
-- `.speechbubble` Discord Speechbuble meme
-- `.tutlasearch` Search the Tutla Website
-- `.dice`
-- `.pronounce`
+- New Tutla Tips
+- New AI Models for image generation
+- Earn coins through `.coinflip`
+- `.random` has 2 new aparams: `image` and `pfp`
 
+## Removed
+- `.dm`
 
 ## BUG FIXES
-- Aura Swear word logging
-- `.ghostping` not working
-- `.calc` not working
-- `.daily` spam bug
-- `.imgtext` and other image commands not working
+- `.afk` bug
 
 ## MODDING
-- AuraMod: lose and gain aura
-- ClickCrystalsMod: Many new `,help` commands
+- Removed AuraMod
+- Removed eleaderboard
+- Added I-No-oNe's mods to ,help ghost and more in `ClickCrystalsMod.py`

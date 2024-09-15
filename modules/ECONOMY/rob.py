@@ -24,4 +24,4 @@ async def rob_callback(CommandObject,message,self,params,command_data):
                 await message.channel.send(f"{user.mention} You managed to steal {str(cash)} off {user.mention}! W Rizz")
     else: await message.channel.send("You must ping someone to rob!")
     
-rob_command = Command("rob", 'Gets your rob', rob_callback, ECONOMY, aliases=['rob',"currency"])
+rob_command = Command("rob", 'Gets your rob', rob_callback, ECONOMY, aliases=['rob',"steal"])

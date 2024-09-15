@@ -4,7 +4,7 @@ from assistantdata import db
 
 async def afk_callback(CommandObject,message,self,params,command_data):
     reason = message_without_command(params)
-    print(reason)
+    if reason == "": reason = "No reason specified"
     if not message.author.id in afk_users:
         afk_users[message.author.id] = reason
         await message.channel.send("You are now afk!")
@@ -33,7 +33,7 @@ async def afk_callback(CommandObject,message,self,params,command_data):
 👈👕👈
 . 🦵 🦵""")
     else: 
-        afk_users.remove(message.author.id)
+        afk_users.pop(message.author.id,None)
         await message.channel.send("You are no longer in afk")
     
 

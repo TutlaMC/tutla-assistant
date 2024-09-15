@@ -6,15 +6,17 @@ import io
 
 def download_audio_to_bytes(url):
     ydl_opts = {
-        'format': 'bestaudio/best',
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-        }],
-        'outtmpl': 'temp_audio.%(ext)s',
-        'quiet': True
-    }
+    'format': 'bestaudio/best',
+    'postprocessors': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'mp3',
+        'preferredquality': '192',
+    }],
+    'outtmpl': 'temp_audio.%(ext)s',
+    'postprocessor_args': ['-acodec', 'libmp3lame'],
+    'quiet': True,
+    'force_generic_extractor': True
+}
     with YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
     
@@ -29,7 +31,7 @@ def download_audio_to_bytes(url):
 async def play_callback(CommandObject, message, self, params, command_data):
     if message.author.voice:
         channel = message.author.voice.channel
-        voice_client = utils.get(self.voice_clients, guild=message.guild)
+        voice_client = utils.get(self.voice_clients)
         
         if voice_client and voice_client.is_connected():
             await voice_client.disconnect()

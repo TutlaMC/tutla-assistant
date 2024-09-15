@@ -5,6 +5,7 @@ from mods import mod
 from assistantdata import db
 from datetime import datetime
 import sqlite3
+import asyncio
 import os
 from aiohttp import ClientSession, ClientError
 
@@ -14,9 +15,12 @@ afk_users = {}
 fonts= []
 
 # SETTINGS
-version = 'V1.5.4'
-dev_mode = False
+version = 'V1.5.5'
+dev_mode = True
 self_bot = False
+
+logging_channel = 1281476804909203529
+
 
 true = True
 false = False
@@ -37,8 +41,9 @@ class Logger:
     END = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
-    def __init__(self,name):
+    def __init__(self,name,subexecution=None):
         self.name = f"[{name.upper()}]"
+        self.seb = subexecution
     def log(self, text, style="normal"):
         if style == "warning":
             prefix = Logger.WARNING+"WARNING "+self.name+Logger.END
@@ -54,6 +59,7 @@ class Logger:
         prefix+=": "
         text = prefix+text
         print(text)
+        if self.seb != None: asyncio.run(self.seb())
 
 ModuleLogger = Logger("module")
 HTTPLogger = Logger("http")
@@ -62,6 +68,11 @@ DBLogger = Logger("database")
 MainLogger = Logger("main")
 ShellLogger = Logger("shell")
 DebugLogger = Logger("debug")
+
+
+async def channel_log(self,log):
+    logto = await self.fetch_channel(logging_channel)
+    await logto.send(log)
 
 def dlog(text):
     if dev_mode: DebugLogger.log(text)
@@ -204,6 +215,7 @@ def execute(cmd):
 def paramExists(p,n):
     if len(p) >= n+1:
         return True
+    elif len(p) >= n: return True
     else: return False
 def hasCoins(user_id, coins):
     if db.getData(user_id,"coins") >= coins: return True

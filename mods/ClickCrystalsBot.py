@@ -81,7 +81,7 @@ When you see the message "Reloaded ClickCrystals Client!" open up your Custom Ma
       elif params[1] in ["count","dlcount","downloads"]: 
          cc = await ClickCrystalsMod.bot.fetch_guild(1095079504516493404)
          await message.channel.send(f"⬇️ Download Count: {dls['total']}\n- 🐈‍⬛ Github: {dls['github']}\n- 🪓 Curseforge: {dls['curseforge']}\n- 🐸 Modrinth: {dls['modrinth']}\n- 🌍 PlanetMC: {dls['planetmc']}\n\n 👨 Member Count: {cc.member_count}")
-      elif params[1] == "ghost": await message.channel.send("To make ClickCrystals a ghostclient go to Settings > Advanced Settings > Disable Module Toogle Broadcast & Disable Loading Screen")
+      elif params[1] == "ghost": await message.channel.send("To make ClickCrystals a ghostclient **Use I-No-oNe's ClickCrystal Addon** or if your lazy and want a smaller but easier alternative: go to Settings > Advanced Settings > Disable Module Toogle Broadcast & Disable Loading Screen")
       else: await message.channel.send("Incorrect Usage, use `,help` to see all commands")
 
 ClickCrystalsMod.on_message(recieve_message)

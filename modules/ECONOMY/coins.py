@@ -5,4 +5,4 @@ async def coins_callback(CommandObject,message,self,params,command_data):
     for i in message.mentions:
         await message.channel.send(f"{i.mention} Coins: {str(int(db.getData(i.id,'coins')))}",silent=True)
     
-coins_command = Command("coins", 'Gets your coins', coins_callback, ECONOMY, aliases=['coins',"currency"])
+coins_command = Command("coins", 'Gets your coins', coins_callback, ECONOMY, aliases=['bal',"balance"])

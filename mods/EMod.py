@@ -19,15 +19,7 @@ async def recieve_message(message):
             else: await message.channel.send("No e :(")
             
     elif message.content == ".eleaderboard":
-        final="# E LEADERBOARD\n"
-        sortedup = sorted(to_update.items(), key=lambda x: x[1], reverse=True)
-        c = 0
-        for name, val in sortedup:
-            if not name == "global": 
-                c+=1
-                final+=''.join(f'#{str(c)} {name}: {str(val)}')+'\n'
-                
-        await message.channel.send(final)
+        await message.channel.send("E Event is over. Create a ticket, mention TutlaMC or contact a staff member for your reward")
     elif message.content == "e":
 
         if str(message.author.name) in to_update: 

@@ -5,6 +5,33 @@ import discord
 import requests
 from random import randint,  seed
 from aiohttp import ClientSession, ClientError
+import requests
+import os
+
+def flux(prompt):
+    api_token = os.getenv("sdAIkey_ta")
+    api_url = f"https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev"
+    headers = {
+        "Authorization": f"Bearer {api_token}",
+        "Content-Type": "application/json"
+    }
+    data = {
+        "inputs": prompt,
+        "parameters": {
+            "height": 512,
+            "width": 512,
+            "guidance_scale": 3.5,
+            "num_inference_steps": 50,
+            "max_sequence_length": 512
+        }
+    }
+    response = requests.post(api_url, headers=headers, json=data)
+
+    if response.status_code == 200:
+        return BytesIO(response.content)
+    else:
+        return f"Error in generation:```python\n{response.status_code}, {response.text}```"
+
 
 async def create( prompt):
         async with ClientSession() as session:
@@ -39,15 +66,6 @@ ai_command = Command("ai", 'GPT3 AI Within Discord!', ai_callback, TOOLS, aliase
 
 
 async def image(prompt):
-        """
-        Create a new image generation based on the given prompt.
-
-        Args:
-            prompt (str): The prompt for generating the image.
-
-        Returns:
-            resp: The generated image content
-        """
         headers = {
             "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.79 Safari/537.36",
         }
@@ -87,15 +105,22 @@ async def image(prompt):
 
 
 async def image_callback(CommandObject,message,self,params,command_data):
-                            await message.channel.send("Generating please wait")
-                            await message.channel.typing()
-                            resp = requests.get(f"https://pollinations.ai/p/{message.content.replace('.image','')}?width={700}&height={700}&seed={seed()}")
-                            await message.channel.send(f"New Picture generated\n-# Prompt: {message.content}",file=discord.File(BytesIO(resp.content), filename='image.jpg'))
-async def imagine_callback(CommandObject,message,self,params,command_data):
-                            e = await message.channel.send("Generating please wait")
-                            await message.channel.typing()
-                            resp = await image(message_without_command(params))
-                            await e.delete()
-                            await message.channel.send(f"Image Generation with Prodia\n-# Prompt: {message.content}",file=discord.File(BytesIO(resp), filename='image.jpg'))
-image_command = Command("image", 'AI Image Generation!', image_callback, TOOLS, aliases=['picture'],params=["PROMPT"],ispremium=True)
-imagine_command = Command("imagine", 'AI Image Generation with Prodia', imagine_callback, TOOLS, aliases=["think","draw"],params=["PROMPT"],ispremium=True)
+    model = params[1]
+    prompt = message_without_command(params[1:])
+    await message.channel.send("Generating please wait")
+    await message.channel.typing()
+    if params[1] == "flux":
+        img = flux(prompt)
+        await message.channel.send(f"New Picture generated with `flux` \n-# Prompt: {message.content}",file=discord.File(img, filename='image.png'))
+    elif params[1] == "pollinations":
+        resp = requests.get(f"https://pollinations.ai/p/{prompt}?width={700}&height={700}&seed={seed()}")
+        await message.channel.send(f"New Picture generated with `pollinations`\n-# Prompt: {message.content}",file=discord.File(BytesIO(resp.content), filename='image.png'))
+    elif params[1] == "prodia":
+        resp = await image(prompt)
+        await message.channel.send(f"New Picture generated with `prodia`\n-# Prompt: {message.content}",file=discord.File(BytesIO(resp), filename='image.png'))
+    else: 
+        resp = requests.get(f"https://pollinations.ai/p/{prompt}?width={700}&height={700}&seed={seed()}")
+        await message.channel.send(f"New Picture generated with `default:pollinations`\n-# Prompt: {message.content}",file=discord.File(BytesIO(resp.content), filename='image.png'))
+                                
+
+imagine_command = Command("imagine", 'AI Image Generation', image_callback, TOOLS, aliases=["think","draw","image"],params=["Optional:MODEL","PROMPT"],ispremium=True)

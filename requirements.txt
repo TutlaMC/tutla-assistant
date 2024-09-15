@@ -4,3 +4,4 @@ BeautifulSoup
 pillow
 rembg
 yt_dlp
+pynacl
