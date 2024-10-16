@@ -1,36 +1,14 @@
 # Utils
-import base64
-import socket
+import socket, json, base64, sqlite3, asyncio, os, requests
 from mods import mod
-from assistantdata import db
+from data import db
 from datetime import datetime
-import sqlite3
-import asyncio
-import os
 from aiohttp import ClientSession, ClientError
-
+from discord.ext import tasks
 premium_list = []
 banlist=[]
 afk_users = {}
 fonts= []
-
-# SETTINGS
-version = 'V1.5.5'
-dev_mode = True
-self_bot = False
-
-logging_channel = 1281476804909203529
-
-
-true = True
-false = False
-
-for i in os.listdir('assistantdata/fonts'):
-       fonts.append(i.replace('.ttf',''))
-
-def getCmdCount():
-    from modules.Module import cmd_count
-    return cmd_count
 
 class Logger:
     HEADER = '\033[95m'
@@ -45,6 +23,7 @@ class Logger:
         self.name = f"[{name.upper()}]"
         self.seb = subexecution
     def log(self, text, style="normal"):
+        text = str(text)
         if style == "warning":
             prefix = Logger.WARNING+"WARNING "+self.name+Logger.END
         elif style == "error":
@@ -69,10 +48,50 @@ MainLogger = Logger("main")
 ShellLogger = Logger("shell")
 DebugLogger = Logger("debug")
 
+# SETTINGS
+
+MainLogger.log("Loading Config",style="execution")
+with open('data/config.json', 'r', encoding='utf-8') as file:
+    data = json.load(file)
+
+version = data['version']
+dev_mode = data['dev_mode']
+feed = data['feed']
+logging_channel = data['logging_channel']
+
+about = data['phrases']['about']
+discords = data['phrases']['discords']
+TOS = data['phrases']['TOS']
+
+question_otd = ""
+
+rapid_api_key = os.getenv('rapid_api_key')
+
+true = True
+false = False
+
+for i in os.listdir('data/fonts'):
+       fonts.append(i.replace('.ttf',''))
+
+
+
+
 
 async def channel_log(self,log):
     logto = await self.fetch_channel(logging_channel)
     await logto.send(log)
+async def sendToSubScribers(bot, message,embed=None):
+    if not feed: return false 
+    with open('data/subscribed.txt','r') as f:
+        e  = f.readlines()
+    for i in e:
+        try:
+            z = await bot.fetch_channel(int(i))
+            if embed:
+                await z.send(message,embed=embed)
+            else: await z.send(message)
+        except Exception:
+            MainLogger.log("Can't send feed to subscribed channel",style="warning")
 
 def dlog(text):
     if dev_mode: DebugLogger.log(text)
@@ -83,6 +102,12 @@ def domain_to_ip(domain):
         return ip_address
     except socket.gaierror:
         return "Unable to resolve the domain."
+def api(url, host, query):
+    return requests.get(url, headers={
+        "x-rapidapi-key": rapid_api_key,
+        "x-rapidapi-host": host
+    }, params=query)
+
 def convert_to_base64(number):
 
     byte_representation = str(number).encode('utf-8')
@@ -96,7 +121,7 @@ def convert_to_base64(number):
 def premium_reload():
     global premium_list
     MainLogger.log("Loading Premium Users")
-    connection = sqlite3.connect('assistantdata/users.db')
+    connection = sqlite3.connect('data/users.db')
     cursor = connection.cursor()
     
     query = "SELECT user_id FROM users WHERE premium = 1"
@@ -114,7 +139,7 @@ def premium_reload():
 def ban_reload():
     global banlist
     MainLogger.log("Loading banned Users")
-    connection = sqlite3.connect('assistantdata/users.db')
+    connection = sqlite3.connect('data/users.db')
     cursor = connection.cursor()
     
     query = "SELECT user_id FROM users WHERE banned = 1"
@@ -127,10 +152,7 @@ def ban_reload():
 
     for user_id in banned_user_ids:
         banlist.append(user_id) 
-def message_without_command(params):
-    message = ""
-    for param in params[1:]: message += param+" "
-    return message
+
 def getAdminLevel(user_id):
     0 # User
     1 # Can add/remove premium
@@ -138,8 +160,8 @@ def getAdminLevel(user_id):
     3 # Can ban users
     4 # Can reboot
     l1 = []
-    l2 = [1246345221210509333, 1175455408538800205]
-    l3 = [827820322706292736]
+    l2 = [1175455408538800205]
+    l3 = []
     l4 = [1142511163821801493, 1158452261538771055]
     if user_id in l1: return 1
     elif user_id in  l2: return 2
@@ -169,9 +191,8 @@ def getSlowmode(user_id):
     seconds_diff = time_difference.total_seconds()
 
     return seconds_diff
-async def ai(prompt,message):
+async def ai(prompt):
     HTTPLogger.log("Fetching AI Response", style="execution")
-    await message.channel.typing()
     async with ClientSession() as session:
             try:
                 async with session.post(
@@ -198,8 +219,9 @@ async def ai(prompt,message):
 
 
 def execute(cmd):
-    if cmd == "exit":
-            exit()
+    if cmd == "sp":
+        exit()
+        
     elif cmd.startswith("execute"):
             toex = cmd.replace("execute ", "")
             ShellLogger.log("Executing Shell Command: "+toex)
@@ -215,7 +237,6 @@ def execute(cmd):
 def paramExists(p,n):
     if len(p) >= n+1:
         return True
-    elif len(p) >= n: return True
     else: return False
 def hasCoins(user_id, coins):
     if db.getData(user_id,"coins") >= coins: return True

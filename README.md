@@ -3,19 +3,12 @@ Official Tutla Assistant Bot source code
 
 ## The Bot
 The Tutla Assitant bot has been a project I've worked on for a long time. Today, I decided to share this project.
-Tutla Assistant is a Discord Selfbot that has many QOL & Helpful commands, you can see all the commands by running `.help` on any channel.
+Tutla Assistant is a Discord Selfbot that has many QOL & Helpful commands, you can see all the commands by running `/help` on any channel.
 
-## UPDATE 1.5
+## UPDATE V2
 See https://github.com/TutlaMC/tutla-assistant/blob/main/changelog.md
 
 
-## Note
-This is a selfbot and break Discord's TOS, use it knowing the risks. Secondly, the source code provided is raw and has not been modified for your installation. You willl manually have to change the invite links and so on, you may want to change:
-- The Admin Command Roles
-- Invite
-- Support Links
-- Custom Discord server configurations
-- Ballsdex pings for myself
 
 ## Installation
 You require:
@@ -28,16 +21,28 @@ Python Libraries: `requirements.txt`
 To install this you will first install Python 3.8+ with it in the environment variables. After that you may want to install each of the libraries as follows:
 `pip install -r requirements.txt`
 
-Once successfully installing the libraries you would want to make some changes in the file as it has many advertisements to our Discord and more which have been listed in the notice above.
+Once successfully installing the libraries you would want to make some changes in the `config`, here's how to:
+(`data/config.json`)
+```json
+{
+    "version":"v2", // version
+    "dev_mode":false, // developer mode
+    "feed":true, // if you want subscribers to your feed
+    "logging_channel": 0,// The channel (id in INT) where you'll store the QOTD, Bugs & Suggestions in
+    "phrases":{
+        "discords": "YOUR DISCORD SERVER LINKS",
+        "about": "ABOUT YOUR BOT",
+        "TOS":"https://github.com/TutlaMC/tutla-assistant/blob/main/TOS.md OR YOUR CUSTOM TOS"
+    }
+}
+```
+Change these accordingly or use the prebuilt one we've provided (but do change the `logging_channel` var).
 
-Then you may proceed to adding the account you want to run the assistant program on. You must get the token of the account and create an environmental vairable called "TA_TOKEN".
-Once the installation is complete you can follow this **optional** method that keeps it 24/7/365:
-
-### Running as a SelfBot (Beta)
-You can run Tutla Assistance as a Selfbot on your own user by setting the `self_bot` variable in `modules/Utils.py` to `True`. It disables anyone other than the user token from using it. 
+Then you may proceed to adding the account you want to run the assistant program on. You must get the token of the account and create an environmental vairable called "TOKEN" and "rapid_api_key" (get it at the rapid api website).
 
 ### 24/7 running
-We have also added `run.sh` (for linux) that will restart the file when it crashes (it sometimes crashes). You will need to change `python3.9 main.py` to whatever suits you. That line is the command to run the script with `python3.9` being your python eecutable command and the following file is your code. 
+You'll first need a host that uses (Windows is fine but we're using an `sh` file here)
+We have also added `run.sh` (for linux) that will restart the file when it crashes (it sometimes crashes). You will need to change `python3.9 main.py` to whatever suits you. That line is the command to run the script with `python3.9` being your python executable command and the following file is your code. 
 
 Run `./run.sh` to get it started
 
@@ -48,25 +53,37 @@ Open up the modules folder and in one of the section create your file. It doesn'
 
 After that you can follow this example if it's in my command structure:
 ```python
-from ..Module import * 
-#from ..Utils import * #import this if you need utility commands
-async def example_callback(CommandObject,message,self,params,command_data):
-                    premium = command_data['premium']
-                    await message.channle.send(CommandObject.description+f"\nWhat you said: {params[1]}")
-ex_command = Command("example","Example command for making a PR to the Tutla Asisstance bot, see the Github for more info.",example_callback,CLIENT,aliases=['command','ex'],params=["TEST PARAM"])
+from ..Module import *
+from ..Utils import *
+import discord
+class YourCogCommands(commands.Cog): # (Optional, you can use the cogs we've already provided) 
+    def __init__(self, bot):
+        self.bot = bot
+
+    @premium_command # (Optional) Decorator to make it a premium command
+    @app_commands.command(name="dm",description="DM a user") # Create the Command
+    @app_commands.check(commandCheck) # (Reccomended) (Optional) Check for reject command for banned users and TOS requirement
+    @app_commands.user_install() # (Optional) Make it a User Install command
+    async def dm_callback(self,interaction: discord.Interaction,user:discord.User,text:str): # Paramaters
+        await user.send(text)
+        await interaction.response.send_message("Sent!",ephemeral=True)
+
+async def setup(bot: commands.Bot):
+    await bot.add_cog(YourCogCommands(bot))
 ```
 
 
-1. `from ..Module import *` will give you the Command Class and a few categories to start with. Change this line to your file structure
-2. Next we come to the asynchronous function, you can name it anything but it must be updated in the Command declaration. This function must take 5 parameters.
-3. Inside the command we can get the "member" variable off the command_data. You can use this to check if the member is a part of your server, similiarly of premium. Then finally we send a message with the description of the command and the first parameter.
-4. Finally we will declare the command with it's name, description, function to execute it and category. Additionally we are also giving aliases to for easier remembrance and parameters (this does not give functionality, it only displays on the help menu) and finally we are making this command free allowing anyone to use it.
+1. `from ..Module import *` This code automatically import all the neccasary libraries
+2. Next we have the decorators which as you see in the comments makes it a premium, user installable command which is named "dm" and can "Dm a user". The command check checks for several things and which I definetly reccomend using
+3. Next we come to the asynchronous function, you can name it anything and requires the `self` and `interaction` parameters
+4. Inside the command we send the `user` a message (`text`) and then respond to the `interaction` by telling you've sent the message
+5. the `setup` and Cog declaration is used for creating the Cog tohandle the commands. You can use any of the cogs I've alreayd provided for it.
 
-**NOTE:** Aliases are needed as they will trigger for every command if not applied, this is a bug and will be fixed next update.
-**NOTE:** The category template can be declared in Module.py and you can pass ina  string for the category if not declaring in Module.py
+*AdvancedCogs are group commands, `group = app_commands.Group(name="groupName", description="groupDesc")` they have almost no difference apart from the fact that they can't be used as a user_install command, commands are not cerated with `app_commands.command` but with `group.command` and you can create subcommands by just adding a `parent=group` to the parent group.*
+    
 
 ## Database 
-`from assistantdata import db`, uses `sqllite3`
+`from data import db`, uses `sqllite3`
 
 ```yaml
 Func initalize_db(): Intializes DB
@@ -76,6 +93,16 @@ Func add_user(user_id: int, member=False, premium=False, banned=False, mod=0, au
 Func edit_user(user_id: int, member=False, premium=False, banned=False, mod=0, aura=1000, slowmode=None, last_command=" ",daily=None,xp=10): Edit a user's data
 Func user_exists(user_id): Returns if a user's data is stored or not
 Func get_data(user_id, column_name): Get a specific user data
+```
+
+```yaml
+Func initalize_db(): Intializes DB
+Func printDB(): Returns DB Contents
+
+Func add_server(server_id: int, **kwargs): Adds a server to the DB
+Func edit_server(server_id: int, **kwargs): Edit a server's data
+Func server_exists(server_id): Returns if a server's data is stored or not
+Func get_data(server_id, column_name): Get a specific server data
 ```
 
 
@@ -89,16 +116,23 @@ Globals
 List premium_list []: Premium users
 List banlist []: Banned Users 
 
+# config.json load
+
 Var version: Current Version
-Var dev_mode [true/false]: Debug Mode
-Var self_bot [true/false]: Selfbot Mode
+Var dev_mode [bool]: Debug Mode
+Var feed [bool]: Enables subscribption
+Var logging_channel: Channel for storing data
+
+Var about: About your bot
+Var discords: Your discords
+Var TOS: TOS
 
 Var true: True
 Var false: False
 
 Func premium_reload: Reloads all premium users (premium_list)
 Func ban_reload: Reloads all banned users (banlist)
-Func getCmdCount(): Returns total command count
+Func getCmdCount: Returns total command count
 ```
 
 Logging
@@ -127,7 +161,7 @@ Func message_without_command(params:List[message.content.split()]): Returns the 
 
 Utility Functions:
 ```yaml
-Func ai(text): Generates AI Response
+Func ai(prompt): Generates AI Response
 Func execute(command): Executes Tutla Shell Prompts
 ```
 

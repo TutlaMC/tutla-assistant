@@ -1,0 +1,11 @@
+{
+    "version":"v2",
+    "dev_mode":false,
+    "feed":true,
+    "logging_channel": 1281476804909203529,
+    "phrases":{
+        "discords": "Tutla Discords:\n- Main: https://discord.gg/YUdt6JWR / <https://discord.tutla.net>\n- Projects: <https://discord.tutla.net/projects>\n- Personal/Gaming: <https://discord.tutla.net/tutlamc>\n- Tickets: <https://discord.tutla.net/ticket>",
+        "about": "## Tutla Assistance\nTutla Assistance is a freemium & open-source project by the Tutla Community that runs 24/7. The bot is a powerful tool that can join any server and be used for various purposes under various categories.\n\nYou can checkout all the commands by using `/help`\n\nKey Features:\n- Image Editing\n- AI\n- Economy\n- Games\n- Server Management\n- Tools\n- Modding\n- Music Player\n- Administration commands\n### Links 🔗\n- Github\n- Website\n- Docs\n### Premium\nTutla Assistance Premium provides a variety of features and commands the common user doesn't have- including image generation, music player, many fun commands and more!\n\nGet Premium! (or be a loser)\n### Support 💝\nIt costs a lot for us to develop & host it 24/7. We'd love a kind donation for keeping the project alive 💖\n\n- Give us a donation with Tutla Perks\n- Give us a small gift on PayPal\n- Give us a ⭐ on the Github Repo!\n- Join the Discord!\n- Or get Premium\n\n### Credits & Team 📜\n\n__Development__\nHead Developer: TutlaMC\nAPIs: Too many to name\nLibraries: https://github.com/TutlaMC/tutla-assistant/blob/main/requirements.txt\n\n__Branding & Design__\nDescription: TutlaMC\nWebsite: TutlaMC\nBlog: TutlaMC\nLogo: TutlaMC\nResponse Structure: TutlaMC\n\n__Bot Admins__\nOwner (Super Admin): Ardtyss, TutlaMC\nAdmins: \nMods: Cat123Go\nHelpers: \n\n__Contributors__\n- ardtyss\n- MrBreakNfix\n- Tycho10101\nThanks to I-No-oNe for being our first ever user!\nThanks to Ardtyss, Void, Cat123Go for providing your wonderful suggestions!\nThanks you Ardtyss for contributing so much (10% of the bot!)\n\nI'd also want to thank all the premium users & contributors for your support.",
+        "TOS":"https://github.com/TutlaMC/tutla-assistant/blob/main/TOS.md"
+    }
+}

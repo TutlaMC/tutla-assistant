@@ -1,7 +1,7 @@
-discord.py-self
+discord.py
 wikipedia
-BeautifulSoup
+BeautifulSoup4
 pillow
 rembg
-yt_dlp
 pynacl
+requests

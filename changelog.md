@@ -1,33 +1,39 @@
-# Update V1.5.5
+# Update V2
+Note: *Wow one year of development!*
 
 ## ADDED
-- `.report`: Report Bugs/Issues & suggestions
-- `.code`: Learn coding with roasting people!
-- `.currency`: Convert Currencies
-- `.freaky`: 𝓯𝓻𝓮𝓪𝓴𝔂 text
-- `.qr`: Generate a qr code
-- `.unsplash`: Search Unsplash images
-- `.weather`: Get weather data for a city
-- `.cartoon`: generates a cartoon character for the text
-- `.scale`: Get an image scale for pixels
-- `.fact`: Gets a random fact
-- `.quote`: Gets a quote
-- `.furry`: Furry pics
-- `.infiniterps`: Play rock paper scissors with anything!
-- `.c4` & `.tictactoe`: Minigames
-
-- New Tutla Tips
-- New AI Models for image generation
-- Earn coins through `.coinflip`
-- `.random` has 2 new aparams: `image` and `pfp`
+- 30+ New Commands
+- / commands
+- User Install Commands
+- Advanced/Better Purge
+- Database Reset
+- TOS
+- Subscribing to Tutla Feed
+- Config (`data/config.json`)
+- Updated `requirements.txt`
 
 ## Removed
-- `.dm`
+- Several commands due to incompatibility or uselessness (such as `.react` and more)
+
+## Backend Changes
+- Usage of `discord.py` Cogs instead of my custom `Module` code in `modules/Module.py`
+- Usage of the new `user_install` commands
+- Group Cogs have been put in the `AdvancedCogs` directory and normal user install commands in the `Cogs` category
 
 ## BUG FIXES
-- `.afk` bug
+- Most bugs (we haven't made a list unlike last time)
+- **Many new bugs expected due to brand new backend**
 
 ## MODDING
-- Removed AuraMod
-- Removed eleaderboard
-- Added I-No-oNe's mods to ,help ghost and more in `ClickCrystalsMod.py`
+- ClickCrystalsMod Updated
+- Removed EMod
+- Nothing else???!
+
+## What remains the same?
+- The 100 other commands
+- Most Mods
+- Modding
+- *The outputs are all the same, all that's changed is how you use it and where you use it.*
+
+**Many changed not listed here**
+**Docs to be updated**
