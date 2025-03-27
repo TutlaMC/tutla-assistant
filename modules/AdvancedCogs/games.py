@@ -1,6 +1,7 @@
 from ..Module import * 
 from ..Utils import *
 import random as ran
+import random 
 import requests
 from discord.ui import Button, View
 
@@ -139,6 +140,23 @@ class GameGroup(commands.Cog):
         else:
             c4games[user_id] = GameBoard(rows=3,cols=3,win_length=3)
             await ctx.response.send_message(f"tictactoe started! {ctx.user.mention} my bro is X.\n{c4games[user_id].display_board()}")
+
+     @app_commands.command(name="eightball", description="Ask the 8-ball a question.")
+     @app_commands.check(commandCheck)
+     @app_commands.user_install()
+     async def eightball_callback(self, ctx: discord.Interaction, question: str):
+        """ Consult 8ball to receive an answer """
+        ballresponse = [
+            "Yes", "No", "Take a wild guess...", "Very doubtful",
+            "Sure", "Without a doubt", "Most likely", "Might be possible",
+            "You'll be the judge", "no... (╯°□°）╯︵ ┻━┻", "no... baka",
+            "senpai, pls no ;-;", "It is certain.", "Ask again later.",
+            "Better not tell you now.", "Don't count on it.", "My sources say no.",
+            "Outlook not so good."
+        ]
+
+        answer = random.choice(ballresponse)
+        await ctx.response.send_message(f"🎱 **Question:** {question}\n**Answer:** {answer}")
 
     @group.command(name="connect4", description="Play a game of connect4")
     @app_commands.check(commandCheck)
