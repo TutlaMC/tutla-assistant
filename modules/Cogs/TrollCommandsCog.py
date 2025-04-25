@@ -66,7 +66,6 @@ facts = [
     "The hottest spot on the planet is in Libya.",
     "Only two mammals like spicy food: humans and the tree shrew.",
     "The longest wedding veil was longer than 63 football fields.",
-    "The inventor of the microwave appliance received only \$2 for his discovery.",
     "The Eiffel Tower can be 15 cm taller during the summer.",
     "There's a fruit that tastes like chocolate pudding.",
     "More people visit France than any other country.",
