@@ -5,3 +5,4 @@ pillow
 rembg
 pynacl
 requests
+onnxruntime
