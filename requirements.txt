@@ -6,3 +6,4 @@ rembg
 pynacl
 requests
 onnxruntime
+youtube_dl
