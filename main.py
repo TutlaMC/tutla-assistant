@@ -42,7 +42,7 @@ class Client(commands.Bot):
         ban_reload()  
         DBLogger.log(db.printDB(),style="execution")
 
-        #await self.change_presence(status=discord.Status.idle, activity=discord.CustomActivity(name="join4join.xyz"))# j4j farm fr
+        await self.change_presence(status=discord.Status.idle, activity=discord.CustomActivity(name="tutla.net"))# j4j farm fr
         
         ModLogger.log("Initializing Mods",style="execution")
         for mode in mod.mods: # Mod Intializer
