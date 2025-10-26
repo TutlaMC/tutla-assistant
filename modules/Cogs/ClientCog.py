@@ -159,7 +159,7 @@ class ClientInfoCommands(commands.Cog):
 
                     image = Image.open(BytesIO(response.content))
                     width, height = image.size
-                    crop_height = int(height * 0.8)
+                    crop_height = int(height * 0.85)
                     cropped = image.crop((0, 0, width, height - crop_height))
 
                     buffer = BytesIO()
