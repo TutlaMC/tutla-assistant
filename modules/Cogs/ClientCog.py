@@ -147,11 +147,11 @@ class ClientInfoCommands(commands.Cog):
                     await webhook.delete()
                 else:
                     params = {
-                        "name": "AuraFarmer69",
+                        "name": user.name,
                         "color": "white",
-                        "time": "Today at 9:24 PM",
-                        "avatar": "https://cdn.discordapp.com/avatars/1377292227373437069/d257140e413707700606a507520f2952.png?size=512",
-                        "text": "those who know"
+                        "time": f"Today at {datetime.now().strftime('%I:%M %p')}",
+                        "avatar": user.avatar.url,
+                        "text": censored
                     }
 
                     response = requests.get("https://tools.tutla.net/api/message", params=params)
