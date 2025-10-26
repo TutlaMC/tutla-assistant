@@ -86,7 +86,7 @@ class ClientInfoCommands(commands.Cog):
     @app_commands.command(name="say",description='Say something')
     @app_commands.check(commandCheck)
     @app_commands.user_install()
-    async def say_callback(self,ctx: discord.Interaction,phrase: str,hear:bool=False,user:discord.User=None):
+    async def say_callback(self,ctx: discord.Interaction,phrase: str,hear:bool=False,user:discord.User=None,old:bool=False):
         await ctx.response.defer()
         if not hear:
             if "rizz" in phrase:
@@ -141,10 +141,25 @@ class ClientInfoCommands(commands.Cog):
                 v2 = e
                 censored = api("https://community-purgomalum.p.rapidapi.com/json","community-purgomalum.p.rapidapi.com",{"text":v2}).json()['result']
                 censored = censored.replace('*','#')
+                if old:
+                    webhook = await ctx.channel.create_webhook(name=user.name, avatar=await user.avatar.read())
+                    await webhook.send(content=censored, username=user.name, avatar_url=user.avatar.url, silent=True)
+                    await webhook.delete()
+                else:
+                    params = {
+                        "name": "AuraFarmer69",
+                        "color": "white",
+                        "time": "Today at 9:24 PM",
+                        "avatar": "https://cdn.discordapp.com/avatars/1377292227373437069/d257140e413707700606a507520f2952.png?size=512",
+                        "text": "those who know"
+                    }
 
-                webhook = await ctx.channel.create_webhook(name=user.name, avatar=await user.avatar.read())
-                await webhook.send(content=censored, username=user.name, avatar_url=user.avatar.url, silent=True)
-                await webhook.delete()
+                    response = requests.get("https://tools.tutla.net/api/message", params=params)
+                    image_data = BytesIO(response.content)
+                    file = discord.File(image_data, filename="message.png")
+
+                    await ctx.followup.send(file=file)
+
         else:
             word = phrase
             await ctx.followup.send("Getting pronounciation",ephemeral=True)
