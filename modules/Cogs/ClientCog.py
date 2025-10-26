@@ -2,6 +2,7 @@
 from ..Module import *
 from ..Utils import *
 from discord.ui import View, Button
+from PIL import Image
 import discord
 import requests
 import random
@@ -155,9 +156,17 @@ class ClientInfoCommands(commands.Cog):
                     }
 
                     response = requests.get("https://tools.tutla.net/api/message", params=params)
-                    image_data = BytesIO(response.content)
-                    file = discord.File(image_data, filename="message.png")
 
+                    image = Image.open(BytesIO(response.content))
+                    width, height = image.size
+                    crop_height = int(height * 0.8)
+                    cropped = image.crop((0, 0, width, height - crop_height))
+
+                    buffer = BytesIO()
+                    cropped.save(buffer, format="PNG")
+                    buffer.seek(0)
+
+                    file = discord.File(buffer, filename="message.png")
                     await ctx.followup.send(file=file)
 
         else:
